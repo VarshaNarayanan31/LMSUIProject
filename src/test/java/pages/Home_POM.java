@@ -8,8 +8,8 @@ import baseClass.TestBase;
 
 public class Home_POM extends TestBase{
 
-
     @FindBy(xpath="")WebElement logo;
+
     @FindBy (xpath="//input[@type='submit'] ")WebElement login_btn;
     public  Home_POM() {
         PageFactory.initElements( driver,this);
@@ -18,6 +18,7 @@ public class Home_POM extends TestBase{
     public void homePageurl() {
 
     }
+
     public boolean verifylogo()
     {
         return logo.isDisplayed();
