@@ -1,6 +1,8 @@
 
 Feature: Attendance details popup window  verification
+
   Background: Admin is Manage attendance page after login
+
     Given Admin is in manage attendance page
     When Admin clicks + a new attendance button
 

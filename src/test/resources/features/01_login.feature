@@ -82,32 +82,3 @@ Feature: Login Page Verification
     When Admin clicks Login button
 
     Then Admin should see password in gray color
-
-@tag02
-  #Background: Admin in login page after clicking login button in home page
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
