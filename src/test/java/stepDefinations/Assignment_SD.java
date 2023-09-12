@@ -1,7 +1,10 @@
 package stepDefinations;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -17,6 +20,15 @@ public class Assignment_SD {
 	long responsetime;
 
 	Assignment_POM Assign = new Assignment_POM(driver);
+	ArrayList<String> sortedList;
+	ArrayList<String> obtainedListAsc;
+	ArrayList<String> obtainedListDesc;
+	
+	@Given("Logged into the Lms portal as admin")
+	public void logged_into_the_lms_portal_as_admin() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 
 	@Given("Admin is on dashboard page after Login")
 	public void admin_is_on_dashboard_page_after_login() {
@@ -29,7 +41,7 @@ public class Assignment_SD {
 	public void admin_clicks_button_on_the_navigation_bar(String string) {
 
 		start = System.currentTimeMillis();
-		Assign.AssignmentButton();
+		Assign.Assignmentlnk();
 
 	}
 
@@ -52,7 +64,7 @@ public class Assignment_SD {
 	@Then("Admin should see header with {string}")
 	public void admin_should_see_header_with(String string) {
 		
-		Assign.verifyTitle();
+		Assign.verifyAssignTitle();
 	}
 
 	@When("Admin clicks {string} button on the navigation bar and get all text from the portal page")
@@ -139,9 +151,9 @@ public class Assignment_SD {
 		Assign.footerText();
 	}
 
-	@When("Admin is on the Manage Assignment page")
+	@Given("Admin is on the Manage Assignment page")
 	public void admin_is_on_the_manage_assignment_page() {
-		Assign.verifyTitle();
+		Assign.verifyAssignTitle();
 	}
 
 	@When("Admin enters Assignment Name into the search box")
@@ -229,4 +241,192 @@ public class Assignment_SD {
 		String nonExistingGradeValue = credential.get(0);
 		Assign.search_NonGradeValue(nonExistingGradeValue);
 	}
+	
+//Assignment details Popup window verification
+	
+	@Given("Admin logged into the LMS portal and clicks assignment button on the navigation bar")
+	public void admin_logged_into_the_lms_portal_and_clicks_assignment_button_on_the_navigation_bar() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Given("Admin is on the {string} Page")
+	public void admin_is_on_the_page(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@When("Admin clicks the {string} button")
+	public void admin_clicks_the_button(String NewAssignmentButton) {
+	    Assign.AssignButtonClick();
+	}
+
+	@Then("Admin should see a popup with the heading {string}")
+	public void admin_should_see_a_popup_with_the_heading(String ExpectedTitle) {
+	    Assign.popWindowTitle();
+	    
+	}
+
+	@Then("Admin should see the following input fields:")
+	public void admin_should_see_the_following_input_fields(io.cucumber.datatable.DataTable dataTable) {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+	    //
+	    // For other transformations you can register a DataTableType.
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("Admin should see {int} textboxes in the Assignment details popup window")
+	public void admin_should_see_textboxes_in_the_assignment_details_popup_window(Integer int1) {
+	    Assign.noOfTextBoxes();
+	}
+
+	@Then("Admin should see a dropdown option for Batch Number")
+	public void admin_should_see_a_dropdown_option_for_batch_number() {
+	    Assign.batchNodropdown();
+	}
+
+	@Then("Admin should see a dropdown option for Program Name")
+	public void admin_should_see_a_dropdown_option_for_program_name() {
+	    Assign.programNameDropdown();
+	}
+
+	@Then("Admin should see a calendar icon for selecting the assignment due date")
+	public void admin_should_see_a_calendar_icon_for_selecting_the_assignment_due_date() {
+	   Assign.validateCalendarIcon();
+	}
+
+	@Then("Admin should see a Save button in the Assignment details popup window")
+	public void admin_should_see_a_save_button_in_the_assignment_details_popup_window() {
+	   Assign.validateSaveBtn();
+	}
+
+	@Then("Admin should see a Cancel button on the Assignment details popup window")
+	public void admin_should_see_a_cancel_button_on_the_assignment_details_popup_window() {
+	    Assign.validateCancelBtn();
+	}
+	@Then("Admin should see a Delete button on the Assignment details popup window")
+	public void admin_should_see_a_delete_button_on_the_assignment_details_popup_window() {
+	    Assign.validatDeleteBtn();
+	}
+	@Then("Admin should see a Close button on the Assignment details popup window")
+	public void admin_should_see_a_close_button_on_the_assignment_details_popup_window() {
+	    Assign.closeIcon();
+	}
+	
+//Verify sort function in manage assignment page
+	
+	@When("Admin click on assignment name column header to sort")
+	public void admin_click_on_assignment_name_column_header_to_sort() {
+		
+		sortedList = new ArrayList<>();   
+		for(WebElement wb:Assign.assignmentNamevalues){
+		sortedList.add(wb.getText());
+		}
+		Collections.sort(sortedList);
+		
+	    Assign.sortAscending();
+	    
+	     obtainedListAsc = new ArrayList<>(); 
+	
+		for(WebElement we:Assign.assignmentNamevalues){
+		   obtainedListAsc.add(we.getText());
+		}
+	    
+	}
+
+	@Then("Admin should see data table sorted in ascending order")
+	public void admin_should_see_data_table_sorted_in_ascending_order() {
+		
+		
+		Assert.assertTrue(sortedList.equals(obtainedListAsc));
+	    
+	}
+
+	@When("Admin double click on assignment name column header to sort")
+	public void admin_double_click_on_assignment_name_column_header_to_sort() {
+		
+		Collections.reverse(sortedList);
+		 Assign.sortDescending();
+		 
+		 obtainedListDesc = new ArrayList<>();
+		 
+		 for(WebElement we:Assign.assignmentNamevalues){
+			   obtainedListDesc.add(we.getText());
+			}
+		 
+	}
+
+	@Then("Admin should see data table sorted in descending order")
+	public void admin_should_see_data_table_sorted_in_descending_order() {
+		
+		Assert.assertTrue(sortedList.equals(obtainedListDesc));
+	}
+
+//Navigation function validation from manage assignment page to other pages 
+	
+	@When("Admin clicks {string} button in the navigation bar")
+	public void admin_clicks_button_in_the_navigation_bar(String linkName) {
+		if (linkName.equalsIgnoreCase("Student")) {
+           Assign.clickStudent();
+        } else if (linkName.equalsIgnoreCase("Program")) {
+           Assign. clickProgram();
+        } else if (linkName.equalsIgnoreCase("Batch")) {
+            Assign.clickBatch();
+        } else if ("User".equalsIgnoreCase("User")) {
+            Assign.clickUser();
+        } else if ("Class".equalsIgnoreCase("Class")) {
+           Assign.clickClass();
+        } else if ("Attendance".equalsIgnoreCase("Attendance")) {
+            Assign.clickAttendance();
+        } else if ("Logout".equalsIgnoreCase("Logout")) {
+            Assign.clickLogout();
+	}
+	}
+
+	@Then("Admin should able to land on student page")
+	public void admin_should_able_to_land_on_student_page() {
+	    Assign.verifyStudentTitle();
+	    driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on program page")
+	public void admin_should_able_to_land_on_program_page() {
+	    Assign.verifyProgramTitle();
+	    driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on batch page")
+	public void admin_should_able_to_land_on_batch_page() {
+	    Assign.verifyBatchTitle();
+	    driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on user page")
+	public void admin_should_able_to_land_on_user_page() {
+	    Assign.verifyUserTitle();
+	    driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on class page")
+	public void admin_should_able_to_land_on_class_page() {
+	    Assign.verifyClassTitle();
+	    driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on attendance page")
+	public void admin_should_able_to_land_on_attendance_page() {
+	   Assign.verifyAttendanceTitle();
+	   driver.navigate().back(); 
+	}
+
+	@Then("Admin should able to land on Login page")
+	public void admin_should_able_to_land_on_login_page() {
+	   Assign.verifyLoginTitle();
+	   
+	}
+
 }
