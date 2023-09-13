@@ -17,6 +17,9 @@ import baseClass.TestBase;
 
 
 public class ClassSD {
+	long start;
+	long end;
+	long responsetime;
 	
 	Class_POM classPom = new Class_POM( driver);
 	
@@ -25,31 +28,30 @@ public class ClassSD {
 	
 	@Given("Admin is on dashboard page after Login")
 	public void admin_is_on_dashboard_page_after_login() {
-	    
+		driver.get(url);
 	}
 
 	@When("Admin clicks {string} button on the navigation bar")
 	public void admin_clicks_button_on_the_navigation_bar(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		start = System.currentTimeMillis();
+		classPom.clickClass();
 	}
 
 	@Then("Admin should see URL with {string}")
 	public void admin_should_see_url_with(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyurl();
+		end = System.currentTimeMillis();
 	}
 
 	@Then("Get the response time for navigation from dashboard page to manage class page")
 	public void get_the_response_time_for_navigation_from_dashboard_page_to_manage_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		long responseTime = end - start;
+		System.out.println("Response time" + responseTime);
 	}
 
 	@Then("Admin should see header with {string}")
 	public void admin_should_see_header_with(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyClassTitle();
 	}
 
 	@When("Admin clicks {string} button on the navigation bar and get all text from the portal page")
@@ -66,180 +68,169 @@ public class ClassSD {
 
 	@Then("Admin should see disabled delete icon below the {string}")
 	public void admin_should_see_disabled_delete_icon_below_the(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.DisabledDeleteIcon();
 	}
 
 	@Then("Admin should see search bar on the class page")
 	public void admin_should_see_search_bar_on_the_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.searchBox();
 	}
 
 	@Then("Admin should see +Add New Class button on the class page")
 	public void admin_should_see_add_new_class_button_on_the_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.NewClassButton();
 	}
 
 	@Then("Admin should see data table on the Manage Class Page With following column headers. \\(Check box symbol,Batch Id, Class No,Class Date, Class Topic, Staff Id, Description, Comments, Notes, Recording, Edit Delete)")
 	public void admin_should_see_data_table_on_the_manage_class_page_with_following_column_headers_check_box_symbol_batch_id_class_no_class_date_class_topic_staff_id_description_comments_notes_recording_edit_delete() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.headerValidation();
 	}
 
 	@Then("Edit Icon in each row of data table only  when entries are available")
 	public void edit_icon_in_each_row_of_data_table_only_when_entries_are_available() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.chkEditBtnIsDisplayed();
 	}
 
 	@Then("Edit Icon will not be present in data table")
 	public void edit_icon_will_not_be_present_in_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.chkEditBtnIsDisplayed();
 	}
 
 	@Then("Delete Icon in each row of data table only  when entries are available")
 	public void delete_icon_in_each_row_of_data_table_only_when_entries_are_available() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.chkDeleteBtnIsDisplayed();
 	}
 
 	@Then("Admin cant see delete  Icon in data table")
 	public void admin_cant_see_delete_icon_in_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.chkDeleteBtnIsDisplayed();
 	}
 
 	@Then("Admin should see sort icon near the column headers except for Edit and Delete")
 	public void admin_should_see_sort_icon_near_the_column_headers_except_for_edit_and_delete() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.sortIcon();
 	}
 
 	@Then("Admin should see check box in the all rows of data table")
 	public void admin_should_see_check_box_in_the_all_rows_of_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   classPom.checkBox();
 	}
 
 	@Then("Above the footer Admin should see the text as {string} below the table.")
 	public void above_the_footer_admin_should_see_the_text_as_below_the_table(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.paginationText();
 	}
 
 	@Then("Admin should see the pagination controls under the data table")
 	public void admin_should_see_the_pagination_controls_under_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   classPom.paginationControl();
 	}
 
 	@Then("Admin should see the text with total number classes in the data table.")
 	public void admin_should_see_the_text_with_total_number_classes_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	   classPom.footerText(0, 0, 0);
 	}
 	
 	//Feature: Manage Class Page Verification_2
 	
 	@Given("Admin is on Manage Class Page")
 	public void admin_is_on_manage_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyClassTitle();
 	}
 
 	@When("Admin enters batch id {string} into search box")
-	public void admin_enters_batch_id_into_search_box(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_enters_batch_id_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+	    classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays entries with that batch Id")
 	public void displays_entries_with_that_batch_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(true, isSearchItemDisplayed, "Searched Batch Id not displayed");
 	}
 
-	@When("Admin enters {string} which is not existing in the table into search box")
-	public void admin_enters_which_is_not_existing_in_the_table_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-	    //
-	    // For other transformations you can register a DataTableType.
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters batch id {string} which is not existing in the table into search box")
+	public void admin_enters_batch_id_which_is_not_existing_in_the_table_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays empty details in the data table")
 	public void displays_empty_details_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(false, isSearchItemDisplayed, "Searched Batch Id is displayed");
 	}
 
 	@When("Admin enters class no {string} into search box")
-	public void admin_enters_class_no_into_search_box(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_enters_class_no_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays entries with that class no")
 	public void displays_entries_with_that_class_no() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(true, isSearchItemDisplayed, "Searched Class No is not displayed");
+	}
+
+	@When("Admin enters class no {string} which is not existing in the table into search box")
+	public void admin_enters_class_no_which_is_not_existing_in_the_table_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@When("Admin enters class topic {string} into search box")
-	public void admin_enters_class_topic_into_search_box(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_enters_class_topic_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays entries with that class topic")
 	public void displays_entries_with_that_class_topic() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(true, isSearchItemDisplayed, "Searched Class Topic is not displayed");
+	}
+
+	@When("Admin enters class topic {string} which is not existing in the table into search box")
+	public void admin_enters_class_topic_which_is_not_existing_in_the_table_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@When("Admin enters staff id {string} into search box")
-	public void admin_enters_staff_id_into_search_box(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_enters_staff_id_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays entries with that staff id")
 	public void displays_entries_with_that_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(true, isSearchItemDisplayed, "Searched Staff Id is not displayed");
+	}
+
+	@When("Admin enters staff id {string} which is not existing in the table into search box")
+	public void admin_enters_staff_id_which_is_not_existing_in_the_table_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@When("Admin enters class date {string} into search box")
-	public void admin_enters_class_date_into_search_box(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_enters_class_date_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
 
 	@Then("Displays entries with that class date")
 	public void displays_entries_with_that_class_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.loadSearchResultsIntoListOfMap();
+	    boolean isSearchItemDisplayed = classPom.checkIfSearchItemDisplayed();
+	    assertEquals(true, isSearchItemDisplayed, "Searched Class Date is not displayed");
 	}
 
-	@When("Admin enters invalid {string} into search box")
-	public void admin_enters_invalid_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
-	    // Write code here that turns the phrase above into concrete actions
-	    // For automatic transformation, change DataTable to one of
-	    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-	    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-	    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-	    //
-	    // For other transformations you can register a DataTableType.
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters invalid class date {string} into search box")
+	public void admin_enters_invalid_class_date_into_search_box(String string, io.cucumber.datatable.DataTable dataTable) {
+		classPom.enterValidDetailsInSearch(dataTable);
 	}
-	
+
+
 	//Feature: Class detail Popup window verification
 	
 	@When("Admin click +Add New Class button")
@@ -758,8 +749,7 @@ public class ClassSD {
 	
 	@Given("Admin is in add class details popup window")
 	public void admin_is_in_add_class_details_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.addClassWindow();
 	}
 
 	@When("Admin creates {int} new class")
@@ -770,8 +760,7 @@ public class ClassSD {
 
 	@Then("When total class entries above {int} next page is enabled \\( On multiples of {int} new page will be enabled)")
 	public void when_total_class_entries_above_next_page_is_enabled_on_multiples_of_new_page_will_be_enabled(Integer int1, Integer int2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.isRightArrowDisplayed();
 	}
 
 	@When("Admin creates less than or equal to {int} new class")
@@ -782,59 +771,73 @@ public class ClassSD {
 
 	@Then("When total class entries  {int} or below next page is disabled")
 	public void when_total_class_entries_or_below_next_page_is_disabled(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.isRightArrowDisplayed();
 	}
 	
 	//Feature: Navigation function validation from manage class page to other pages 
 	
 	@When("Admin clicks {string} button in the navigation bar")
-	public void admin_clicks_button_in_the_navigation_bar(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_clicks_button_in_the_navigation_bar(String linkName) {
+		
+			if (linkName.equalsIgnoreCase("Student")) {
+	           classPom.clickStudent();
+	        } else if (linkName.equalsIgnoreCase("Program")) {
+	        	classPom. clickProgram();
+	        } else if (linkName.equalsIgnoreCase("Batch")) {
+	        	classPom.clickBatch();
+	        } else if ("User".equalsIgnoreCase("User")) {
+	        	classPom.clickUser();
+	        } else if ("Assignment".equalsIgnoreCase("Assignment")) {
+	        	classPom.clickAssignment();
+	        } else if ("Attendance".equalsIgnoreCase("Attendance")) {
+	        	classPom.clickAttendance();
+	        } else if ("Logout".equalsIgnoreCase("Logout")) {
+	        	classPom.clickLogout();
+		}
 	}
 
 	@Then("Admin should be able to land on student page")
 	public void admin_should_be_able_to_land_on_student_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyStudentTitle();
+	    driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on program page")
 	public void admin_should_be_able_to_land_on_program_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyProgramTitle();
+	    driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on batch page")
 	public void admin_should_be_able_to_land_on_batch_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyBatchTitle();
+	    driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on user page")
 	public void admin_should_be_able_to_land_on_user_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyUserTitle();
+	    driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on assignment page")
 	public void admin_should_be_able_to_land_on_assignment_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyAssignmentTitle();
+	    driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on attendance page")
 	public void admin_should_be_able_to_land_on_attendance_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyAttendanceTitle();
+		   driver.navigate().back(); 
 	}
 
 	@Then("Admin should be able to land on login page")
 	public void admin_should_be_able_to_land_on_login_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyLoginTitle();
 	}
+	
+	
 	
 	
 	

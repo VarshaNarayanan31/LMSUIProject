@@ -22,114 +22,111 @@ Feature: Manage Class Page Verification_2
 Background: Admin logged into LMS portal and clicks class button on the navigation bar 
 
 @TC_class_18
-  Scenario Outline: Validate search box function when admin enters the batch id "<option>"
+  Scenario: Validate search box function when admin enters the batch id 
   
     Given Admin is on Manage Class Page
-    When Admin enters batch id "<option>" into search box  
+    When Admin enters batch id "batch id" into search box  
+     |searchField|searchValue|
+     |Batch ID|7576|
+     |Batch ID|8365|
+     |Batch ID|1255|     
     Then Displays entries with that batch Id
     
-    Examples: 
-      | option |
-      | 7576   |
-      | 8365   |
-      | 1255   |
-     
+    
     
     @TC_class_19
   Scenario: Validate search box function when admin enters the batch id which is not existing in the table
   
     Given Admin is on Manage Class Page
-    When Admin enters "batch id" which is not existing in the table into search box 
-    | batch id|
-		| 123589  | 
+    When Admin enters batch id "batch id" which is not existing in the table into search box 
+    |searchField|searchValue|
+		|Batch ID|7576|		
     Then Displays empty details in the data table
     
     @TC_class_20
-  Scenario Outline: Validate search box function when admin enters the class no "<option>"
+  Scenario: Validate search box function when admin enters the class no 
   
     Given Admin is on Manage Class Page
-    When Admin enters class no "<option>" into search box   
+    When Admin enters class no "class no" into search box  
+     |searchField|searchValue|
+     |Class No|1|
+     |Class No|2|
+     |Class No|3|
     Then Displays entries with that class no
     
-    Examples: 
-      | option |
-      | 1      |
-      | 2      |
-      | 3      |
+   
     
     @TC_class_21
   Scenario: Validate search box function when admin enters the class no which is not existing in the table
   
     Given Admin is on Manage Class Page
-    When Admin enters "class no" which is not existing in the table into search box  
-    | class no|
-		| 123589  | 
+    When Admin enters class no "class no" which is not existing in the table into search box  
+    |searchField|searchValue|
+		|Class No|123589|
     Then Displays empty details in the data table
     
     @TC_class_22
-  Scenario Outline: Validate search box function when admin enters the class topic "<option>"
+  Scenario: Validate search box function when admin enters the class topic 
   
     Given Admin is on Manage Class Page
-    When Admin enters class topic "<option>" into search box   
+    When Admin enters class topic "class topic" into search box  
+     |searchField|searchValue|
+     |Class Topic|Python|
+     |Class Topic|Java Applets|
+     |Class Topic|Java|
     Then Displays entries with that class topic
     
-    Examples: 
-      | option      |
-      | Python      |
-      | Java Applets|
-      | Java 22     |
     
     @TC_class_23
   Scenario: Validate search box function when admin enters the class topic which is not existing in the table
   
     Given Admin is on Manage Class Page
-    When Admin enters "class topic" which is not existing in the table into search box  
-    | class topic|
-		| English    | 
+    When Admin enters class topic "class topic" which is not existing in the table into search box  
+    |searchField|searchValue|
+    |Class Topic|English|
     Then Displays empty details in the data table
     
     @TC_class_24
-  Scenario Outline: Validate search box function when admin enters the staff id "<option>"
+  Scenario: Validate search box function when admin enters the staff id 
   
     Given Admin is on Manage Class Page
-    When Admin enters staff id "<option>" into search box   
+    When Admin enters staff id "staff id" into search box
+     |searchField|searchValue|
+     |Staff Id|U01|
+     |Staff Id|U02|
+     |Staff Id|U03| 
     Then Displays entries with that staff id
     
-    Examples: 
-      | option   |
-      | U01      |
-      | U02      |
-      | U03      |
-    
+   
     @TC_class_25
   Scenario: Validate search box function when admin enters the staff id which is not existing in the table
   
     Given Admin is on Manage Class Page
-    When Admin enters "staff id" which is not existing in the table into search box 
-    | staff id|
-		| 12356   |  
+    When Admin enters staff id "staff id" which is not existing in the table into search box 
+     |searchField|searchValue|
+     |Staff Id|123456|
     Then Displays empty details in the data table
     
     @TC_class_26
-  Scenario Outline: Validate search box function when admin enters the class date "<option>"
+  Scenario: Validate search box function when admin enters the class date 
   
     Given Admin is on Manage Class Page
-    When Admin enters class date "<option>" into search box   
+    When Admin enters class date "class date" into search box
+     |searchField|searchValue|
+     |Class Date|12/22/22|
+     |Class Date|3/5/23|
+     |Class Date|3/9/23|
     Then Displays entries with that class date
     
-    Examples: 
-      | option   |
-      | 12/22/22 |
-      | 3/5/23   |
-      | 3/9/23   |
+    
     
     @TC_class_27
   Scenario: Validate search box function when admin enters invalid class date into search box  
   
     Given Admin is on Manage Class Page
-    When Admin enters invalid "class date" into search box 
-     | class date|
-		 | 14/5/23   |  
+    When Admin enters invalid class date "class date" into search box
+     |searchField|searchValue|
+     |Class Date|14/5/23|  
     Then Displays empty details in the data table
     
     
