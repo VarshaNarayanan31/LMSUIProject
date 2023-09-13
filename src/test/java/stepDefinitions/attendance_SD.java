@@ -7,26 +7,35 @@ import org.junit.Assert;
 import pages.Manage_Attendance_POM;
 
     public class attendance_SD extends TestBase {
+
+        long start;
+        long end;
+        long responsetime;
         Manage_Attendance_POM at_manage = new Manage_Attendance_POM();
+
 
         @Given("Admin is on dashboard page after Login")
         public void admin_is_on_dashboard_page_after_Login() {
             Initialization();
-            System.out.println("First Given");
+            System.out.println("Admin is in dashboard page after login");
         }
 
         @When("Admin clicks {string} on the navigation bar")
         public void admin_clicks_on_the_navigation_bar(String string) {
+            start = System.currentTimeMillis();
+           //
 
         }
         //Validate the header of the page
         @Then("Admin should see the {string} in header")
         public void admin_should_see_the_Manage_attendance_in_header(String Heading) {
-
+            at_manage.verifyTitle();
         }
         //Validate response time
         @Then("Maximum navigation time in milliseconds, defaults to {int} seconds")
         public void maximum_navigation_time_in_milliseconds_defaults_to_seconds(Integer int1) {
+            long responseTime = end - start;
+            System.out.println("Response time" + responseTime);
 
 
         }
@@ -39,7 +48,7 @@ import pages.Manage_Attendance_POM;
         //Verify LMS title
         @Then("Admin should see {string}  as title")
         public void admin_should_see_LMS_Learning_management_system_as_title(String expectedtitle) {
-
+            at_manage.verifyTitle();
 
         }
 

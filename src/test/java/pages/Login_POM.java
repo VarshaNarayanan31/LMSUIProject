@@ -10,6 +10,8 @@ public class Login_POM extends TestBase {
 
 
     @FindBy (xpath="//*[contains(text(),'Please login to LMS application')]") WebElement Header_text;
+    @FindBy (xpath="//*[contains(text(),'User')]") WebElement User_Header_text;
+    @FindBy (xpath="//*[contains(text(),'Password')]") WebElement Pass_Header_text;
 // username and password text validation
     @FindBy (id="id_username") WebElement userName_txt;
     @FindBy (id="id_password") WebElement password_txt;
@@ -32,27 +34,23 @@ public class Login_POM extends TestBase {
     @FindBy (id="submit") WebElement SubmitBtn;
 
 
-    //Constructor
+    //usage of Constructor
     public Login_POM() {
 
         PageFactory.initElements(driver, this);
     }
 
-    //Methods
-    public void verifyurl() {
+    //Methods creation
+    public void verify_loginpage() {
+        String title = driver.getTitle();
+        Assert.assertEquals("Login", title);
+        System.out.println("Admin is on " + title + "page");
+    }
 
-        String actualurl = driver.getCurrentUrl();
-        if (actualurl.contains("login")) {
-            System.out.println("user is in login page");
-        } else {
-            System.out.println("user is in some other page");
+        public boolean Header_text (String expectedmsg){
+
+            return Header_text.isDisplayed();
         }
-
-    }
-    public boolean Header_text(String expectedmsg) {
-
-        return Header_text.isDisplayed();
-    }
 
     public void verifyHeader_text() {
 
@@ -69,6 +67,25 @@ public class Login_POM extends TestBase {
     public void passwordTxt(String Password) {
 
         password_txt.sendKeys(Password);
+    }
+    public boolean userName_txt() {
+
+        return userName_txt.isDisplayed();
+
+    }
+    public boolean password_txt() {
+
+        return password_txt.isDisplayed();
+    }
+
+    public boolean User_Header_text (String expectedmsg){
+
+        return User_Header_text.isDisplayed();
+    }
+
+    public boolean Pass_Header_text (String expectedmsg){
+
+        return Pass_Header_text.isDisplayed();
     }
 
     public void loginBtn() {
@@ -163,7 +180,7 @@ public class Login_POM extends TestBase {
     //color code
   // identify text
     public void get_color_field() {
-        WebElement t = driver.findElement(By.tagName("login"));
+        WebElement t = driver.findElement(By.tagName("user"));
         //obtain color
         String s = t.getCssValue("color");
 

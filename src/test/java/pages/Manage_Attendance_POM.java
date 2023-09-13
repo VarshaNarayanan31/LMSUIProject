@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.support.ui.Select;
 
 
 public class Manage_Attendance_POM extends TestBase {
@@ -71,6 +72,7 @@ public class Manage_Attendance_POM extends TestBase {
     //constructor
     public Manage_Attendance_POM() {
         PageFactory.initElements(driver, this);
+
     }
 
     //Methods
@@ -169,6 +171,7 @@ public class Manage_Attendance_POM extends TestBase {
     }
 //multiple button delete & multiple check box
 
+    
 
     public void checkBox() {
 
@@ -179,6 +182,7 @@ public class Manage_Attendance_POM extends TestBase {
             System.out.println("checkbox is not selected");
         }
     }
+
 
 
     public void search_ClassID(String ClassID) {
@@ -256,3 +260,12 @@ public class Manage_Attendance_POM extends TestBase {
 
 
 }
+
+
+
+//public void verfiymultiplecheckBox() {
+//    Object checkbox;
+//    Select multiplecheckbox = new Select(WebElement checkbox);
+//    boolean value;
+//    value = multiplecheckbox.isMultiple();}
+//

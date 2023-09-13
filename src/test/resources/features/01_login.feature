@@ -3,35 +3,36 @@ Feature: Login Page Verification
 
   Background: Admin gives the correct LMS portal URL
     Given Admin is in home page
-
+@tag01
   Scenario: Verify the login page
 
     When Admin clicks Login button
 
     Then Admin should land on the login page
-
-  Scenario Outline: Verify for broken link
+@tag02
+  Scenario : Verify for broken link
 
     When Admin clicks Login button
-    Then HTTP response >= <int1>. Then the link is broken
-    Examples:
-      | int1 |
-      | 400  |
+    Then HTTP response >= 400. Then the link is broken
 
+@tag03
   Scenario: Verify tht header of the login page
     When Admin clicks Login button
 
     Then Admin should see "Please login to LMS application" in the header
 
+  @tag04
   Scenario: Verify the text spelling in login page
     When Admin clicks Login button
 
     Then Admin should see correct spellings in all fields
+@tag05
 
   Scenario: Verify text field is present
     When Admin clicks Login button
 
     Then Admin should see two text field
+@tag06
 
   Scenario: Verify text on the first text field
     When Admin clicks Login button
