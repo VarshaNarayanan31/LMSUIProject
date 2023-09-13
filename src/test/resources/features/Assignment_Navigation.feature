@@ -1,6 +1,7 @@
 Feature: Navigation function validation from manage assignment page to other pages  
 
 Background: Admin is Manage assignment page after logged in
+Given Admin is on the Manage Assignment page
 
 Scenario: Verify admin is able to navigate from manage assignment to student page
 Given Admin is on the Manage Assignment page

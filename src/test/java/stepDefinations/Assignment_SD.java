@@ -6,6 +6,7 @@ import static org.testng.Assert.assertNotEquals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.Assignment_POM;
 
-public class Assignment_SD {
+public class Assignment_SD extends baseClass{
 
 	long start;
 	long end;
@@ -37,7 +38,7 @@ public class Assignment_SD {
 	public void admin_is_on_dashboard_page_after_login() {
 		
 		driver.get(url);
-		LOGGER.info("Admin is in dashboard page after login");
+		Loggerload.info("Admin is in dashboard page after login");
 	}
 
 	@When("Admin clicks {string} button on the navigation bar")
@@ -111,7 +112,7 @@ public class Assignment_SD {
 
 	@Then("Edit Icon in each row of the data table should only appear when entries are available")
 	public void edit_icon_in_each_row_of_the_data_table_should_only_appear_when_entries_are_available() {
-		Assign.c
+		Assign.chkEditBtnIsDisplayed();
 	}
 
 	@Then("Edit Icon should not be present in the data table")
@@ -121,7 +122,7 @@ public class Assignment_SD {
 
 	@Then("Delete Icon in each row of the data table should only appear when entries are available")
 	public void delete_icon_in_each_row_of_the_data_table_should_only_appear_when_entries_are_available() {
-		Assign.emptyField();
+		Assign.chkDeleteBtnIsDisplayed();
 	}
 
 	@Then("Delete Icon should not be present in the data table")
@@ -153,7 +154,8 @@ public class Assignment_SD {
 	public void admin_should_see_the_text_with_the_total_number_of_assignments_in_the_data_table(String string) {
 		Assign.footerText();
 	}
-
+//manageSearch
+	
 	@Given("Admin is on the Manage Assignment page")
 	public void admin_is_on_the_manage_assignment_page() {
 		Assign.verifyAssignTitle();
@@ -261,7 +263,7 @@ public class Assignment_SD {
 
 	@Then("Admin should see a popup with the heading {string}")
 	public void admin_should_see_a_popup_with_the_heading(String ExpectedTitle) {
-	    Assign.popWindowTitle();
+	    Assign.assignpopWindowTitle();
 	    
 	}
 
@@ -378,6 +380,8 @@ public class Assignment_SD {
             Assign.clickUser();
         } else if ("Class".equalsIgnoreCase("Class")) {
            Assign.clickClass();
+        } else if ("Assignment".equalsIgnoreCase("Assignment")) {
+            Assign.Assignmentlnk();; 
         } else if ("Attendance".equalsIgnoreCase("Attendance")) {
             Assign.clickAttendance();
         } else if ("Logout".equalsIgnoreCase("Logout")) {
@@ -452,14 +456,19 @@ public class Assignment_SD {
 	}
 
 	//Delete Assignment 2
+	
+	@Given("Admin clicks row level delete button in Manage Assignment")
+	public void admin_clicks_row_level_delete_button_in_manage_assignment() {
+	   Assign.deleteBtnRightclk();
+	}
 
-	@Given("Admin is in delete alert")
-	public void admin_is_in_delete_alert() {
+	@Given("Admin is in delete alert for assignmentPage")
+	public void admin_is_in_delete_alert_assignment_Page() {
 		Assign.deleteAlertWindow();
 	}
 
-	@When("Admin clicks yes button")
-	public void admin_clicks_yes_button() {
+	@When("Admin clicks yes button for assignment")
+	public void admin_clicks_yes_button_for_assignment() {
 		Assign.yesButtonClick();
 	}
 
@@ -468,12 +477,12 @@ public class Assignment_SD {
 		Assign.successMessage();
 	}
 
-	@When("Admin clicks no button")
-	public void admin_clicks_no_button() {
+	@When("Admin clicks no button for assignment")
+	public void admin_clicks_no_button_assignment() {
 		Assign.noButtonClick();
 	}
 
-	@Then("Admin should land on manage Assignment page and validate particular Assignment details are not deleted from the data table")
+	@Then("Admin should land on manage Assignment page and validate particular assignment details are not deleted from the data table")
 	public void admin_should_land_on_manage_assignment_page_and_validate_particular_assignment_details_are_not_deleted_from_the_data_table() {
 		Assign.verifyAssignTitle();
 		Integer deleteElement = Assign.chkDeletedRow();
@@ -481,28 +490,28 @@ public class Assignment_SD {
 	}
 //Delete multiple assignment1
 
-	@When("Admin clicks single row level check box in the data table")
-	public void admin_clicks_single_row_level_check_box_in_the_data_table() {
+	@When("Admin clicks single row level check box in the data table of manage assignment")
+	public void admin_clicks_single_row_level_check_box_in_the_data_table_of_manage_assignment() {
 		Assign.singleChkBox();
 	}
 
-	@Then("Admin should see delete icon below the header is enabled")
-	public void admin_should_see_delete_icon_below_the_header_is_enabled() {
+	@Then("Admin should see delete icon below the header is enabled in manage assignment")
+	public void admin_should_see_delete_icon_below_the_header_is_enabled_in_manage_assignment() {
 		Assign.headerDeleteEnabled();
 	}
 
-	@Then("Admin should see tick mark in check box")
-	public void admin_should_see_tick_mark_in_check_box() {
+	@Then("Admin should see tick mark in check box in manage assignment")
+	public void admin_should_see_tick_mark_in_check_box_in_manage_assignment() {
 		Assign.tickChkBox();
 	}
 
-	@When("Admin clicks multiple row level check box in the data table")
-	public void admin_clicks_multiple_row_level_check_box_in_the_data_table() {
+	@When("Admin clicks multiple row level check box in the data table of manage assignment")
+	public void admin_clicks_multiple_row_level_check_box_in_the_data_table_of_manage_assignment() {
 		Assign.multipleChkBox();
 	}
 
-	@Then("Admin should see tick mark in check box  of the selected rows")
-	public void admin_should_see_tick_mark_in_check_box_of_the_selected_rows() {
+	@Then("Admin should see tick mark in check box  of the selected rows in manage assignment")
+	public void admin_should_see_tick_mark_in_check_box_of_the_selected_rows_in_manage_assignment() {
 		Assign.tickMultiChkBox();
 	}
 
@@ -518,10 +527,10 @@ public class Assignment_SD {
 
 //add assignment
 
-	@Given("Admin is in  assignment details popup window")
+	@Given("Admin is in assignment details popup window")
 	public void admin_is_in_assignment_details_popup_window() {
 		Assign.assignpopWindowTitle();
-		// LoggerLoad.info("Admin is in assignment details pop up window");
+		 //LoggerLoad.info("Admin is in assignment details pop up window");
 	}
 
 	@When("Admin enters all mandatory field values with valid data from <sheetName> and <rowNumber> and clicks save button")
@@ -645,5 +654,65 @@ public class Assignment_SD {
 	public void selected_date_should_be_their_in_class_date_text_box() {
 		Assert.assertEquals(Assign.date, Assign.selectedDate);
 	}
+	
+// Assignment pagination
+	
+	@Then("Data table should display {int} page  when entries available")
+	public void data_table_should_display_page_when_entries_available(Integer int1) {
+		 assertEquals(1,Assign.currentPageNumber(),"1 page result not displayed");
+	}
+
+	@Then("Right arrow should be enabled in page one  when entries are more than {int} available")
+	public void right_arrow_should_be_enabled_in_page_one_when_entries_are_more_than_available(Integer int1) {
+		   Assign.isRightArrowDisplayed();
+	}
+
+	@Then("Left arrow should be disabled in page one")
+	public void left_arrow_should_be_disabled_in_page_one() {
+	    Assign.isLeftArrowDisplayed();
+	}
+
+	@Then("Right arrow should be enabled in page two when entries are more than {int} available")
+	public void right_arrow_should_be_enabled_in_page_two_when_entries_are_more_than_available(Integer int1) {
+	    Assign.isRightArrowDisplayed();
+	}
+
+	@Then("Left arrow should be enabled in page two")
+	public void left_arrow_should_be_enabled_in_page_two() {
+	   Assign.isLeftArrowDisplayed();
+	}
+
+	@Then("When entries are more than {int} in data table pagination controls enabled")
+	public void when_entries_are_more_than_in_data_table_pagination_controls_enabled(Integer int1) {
+	  Assign.isPaginationArrowDisplayed();
+	}
+
+	@Then("When entries are less than {int} in data table pagination controls disabled")
+	public void when_entries_are_less_than_in_data_table_pagination_controls_disabled(Integer int1) {
+	    Assign.isPaginationArrowDisplayed();
+	}
+	@When("Admin creates {int} new assignment")
+	public void admin_creates_new_assignment(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("When total assignment entries above {int} next page is enabled \\( On multiples of {int} new page will be enabled)")
+	public void when_total_assignment_entries_above_next_page_is_enabled_on_multiples_of_new_page_will_be_enabled(Integer int1, Integer int2) {
+	    Assign.isRightArrowDisplayed();
+	}
+
+	@When("Admin creates less than or equal to {int} new assignment")
+	public void admin_creates_less_than_or_equal_to_new_assignment(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("When total assignment entries  {int} or below next page is disabled")
+	public void when_total_assignment_entries_or_below_next_page_is_disabled(Integer int1) {
+	    Assign.isRightArrowDisplayed();
+	}
+
+	
 
 }

@@ -1,7 +1,7 @@
 Feature: Validate search box function
 
 Background: Admin logged into LMS portal and clicks assignment button on the navigation bar 
-Given Admin clicks assignment button on the navigation bar
+Given Admin clicks "Assignment" button on the navigation bar
 
 Scenario: Validate search box function by assignment name
 Given Admin is on the Manage Assignment page
@@ -15,7 +15,7 @@ Given Admin is on the Manage Assignment page
 When Admin enters non-existing Assignment Name into the search box
 |nonExistingAssignmentName|
 |Jun23-hsgdags|
-Then Displays empty fields in the data table
+Then Displays empty fields in the datatable
 
 Scenario: Validate search box function by assignment description
 Given Admin is on the Manage Assignment page
@@ -59,4 +59,4 @@ Given Admin is on the Manage Assignment page
 When Admin enters non-existing grade Value into the search box
 |nonExistingGradeValue|
 |10|
-Then Displays empty details in the data table 
+Then Displays empty fields in the datatable 

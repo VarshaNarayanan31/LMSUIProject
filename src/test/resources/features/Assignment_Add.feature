@@ -1,10 +1,11 @@
 Feature: Add new Assignmemnt
 
 Background: Admin click +Add new assignment button after reaching to manage assignment page
+Given: Admin click +Add new assignmnet button
 
 Scenario Outline: Validate admin able to add new assignment with valid data in mandatory fields
 
-Given Admin is in  assignment details popup window
+Given Admin is in assignment details popup window
 When Admin enters all mandatory field values with valid data from <sheetName> and <rowNumber> and clicks save button 
 Then Admin should see new assignment details is added in the data table
 
@@ -15,7 +16,7 @@ Examples:
 
 Scenario Outline: Validate admin able to add new assignment with invalid data in mandatory fields
 
-Given Admin is in  assignment details popup window
+Given Admin is in assignment details popup window
 When Admin enters all mandatory field values with invalid data from <sheetName> and <rowNumber> and clicks save button 
 Then Error message should appear in alert
 
@@ -25,7 +26,7 @@ Examples:
 
 Scenario Outline: Validate admin able to add new assignment with valid data in all fields
 
-Given Admin is in  assignment details popup window
+Given Admin is in assignment details popup window
 When Admin enters values in all fields with valid data <sheetName> and <rowNumber> and clicks save button 
 Then Admin should see new assignment details is added in the data table
 

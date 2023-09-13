@@ -1,6 +1,7 @@
 Feature: Delete Assignment validation
 
 Background: Admin logged into LMS portal and clicks assignment button on the navigation bar
+ Given Admin clicks "Assignment" button on the navigation bar
  
   Scenario: Verify Delete Assignment alert
     Given Admin is on the Manage Assignment page

@@ -51,6 +51,7 @@ public class Assignment_POM {
 	@FindBy(xpath = "//table[contains(@id,’Assignment’)/tr[0]/th")List<WebElement> tableHeader;
 	@FindBy(xpath = "//*[@class='btn btn-delete-on-right']")WebElement deleteOnRight_btn;
 	@FindBy(xpath = "//*[@class='btn btn-edit-on-right']")WebElement editOnRight_btn;
+	//@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationRowText;
 	@FindBy(xpath = "//table//thead//tr//th//input")WebElement checkbox;
 	@FindBy(xpath = "//*[contains(text(),'Showing x to y of z entries')]")WebElement paginatorText;
 	@FindBy(xpath = "//*[contains(text(),'In total there are number of assignments')]")WebElement footerText;
@@ -60,7 +61,7 @@ public class Assignment_POM {
 	@FindBy(xpath = "//table//thead//tr//td[2]")public List<WebElement> assignmentDescriptionvalues;
 	@FindBy(xpath = "//table//thead//tr//td[3]")public List<WebElement> assignmentDuedateValues;
 	@FindBy(xpath = "//table//thead//tr//td[4]")public List<WebElement> gradeByValues;
-	@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationControl;
+	//@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationControl;
     @FindBy(xpath = "//a[text()=Assignment Details")WebElement assignmentDetails;
 	@FindBy(className = "sort-icon")WebElement sortIcon;
 	@FindBy(xpath="input[type='text']")List<WebElement> textBoxes;
@@ -81,6 +82,18 @@ public class Assignment_POM {
 	@FindBy(xpath = "//table//thead//tr//th//input")WebElement multiCheckbox;
 	@FindBy(id = "deleteButton")WebElement headerLevelDeleteIcon;
 	@FindBy(className="day")List<WebElement> dates;
+// pagination
+	@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationRowText;
+	@FindBy(xpath = "//*[@class='btn btn-page_number']")WebElement pageNumber;
+	@FindBy(xpath = "//li[@class='pagination-arrow next-link']")WebElement paginationEndArrow;
+	@FindBy(xpath = "//div[@class='add_class']")WebElement addClassPage;
+	@FindBy(className = "header")WebElement headerLinkText;
+	@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationControl;
+	@FindBy(xpath = "//li[@class='searchResultTable']")WebElement searchResultTableElement;
+	@FindBy(xpath = "//li[@class='searchResultTable']")WebElement searchResultTableHeaderElement;
+	@FindBy(xpath = "//*[@class='btn btn-right_arrow']")WebElement right_arrow_btn;
+	@FindBy(xpath = "//*[@class='btn btn-left_arrow']")WebElement left_arrow_btn;
+
 	
 	public void Assignmentlnk() {
 		assignmentLnk.click();
@@ -111,6 +124,40 @@ public class Assignment_POM {
 			System.out.println("Button is enabled");
 		} else {
 			System.out.println("Button is disabled");
+		}
+	}
+	
+	public Integer resultTableDataSize() {
+		String returnedRowsMsg = paginationRowText.getText();
+		return Integer.valueOf(returnedRowsMsg.split(" ")[5]);
+	}
+	
+	public Boolean chkEditBtnIsDisplayed() {
+		if (resultTableDataSize() > 0) {
+			return editOnRight_btn.isEnabled();
+		}
+		else {
+			if (editOnRight_btn.isEnabled()) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		
+	}
+	
+	public Boolean chkDeleteBtnIsDisplayed() {
+		if (resultTableDataSize() > 0) {
+			return deleteOnRight_btn.isEnabled();
+		}
+		else {
+			if (deleteOnRight_btn.isEnabled()) {
+				return false;
+			}
+			else {
+				return true;
+			}
 		}
 	}
 
@@ -530,4 +577,65 @@ public class Assignment_POM {
 		}
 
 	}
+	
+	// pagination assignment
+	
+	public Integer currentPageNumber() {
+		return Integer.valueOf(pageNumber.getText());
+	}
+	
+	public Boolean isRightArrowDisplayed() {
+		
+		if (resultTableDataSize() / 5.0 > 1.0) {
+			return right_arrow_btn.isEnabled();
+		}
+		else {
+			if (right_arrow_btn.isEnabled()) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+	}
+	
+	public Boolean isLeftArrowDisplayed() {
+		
+		if (pageNumber.getText() == "1") {
+			if(left_arrow_btn.isEnabled()) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			if(left_arrow_btn.isEnabled()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		}
+	
+public Boolean isPaginationArrowDisplayed() {
+		
+		if (resultTableDataSize() / 5.0 > 1.0) {
+			return paginationEndArrow.isEnabled();
+		}
+		else {
+			if (paginationEndArrow.isEnabled()) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+	}
+
+public boolean addClassWindow() {
+		return addClassPage.isDisplayed();
+	}
+
 }
