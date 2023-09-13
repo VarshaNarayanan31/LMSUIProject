@@ -29,67 +29,104 @@ Background: Admin click +Add New Class button after reaching to Manage class pag
     Then Batch id in the drop down should match with Batch id in the manage batch page table
     
     @TC_class_38
-  Scenario: Validate admin able to add new class with valid data in mandatory fields
+  Scenario Outline: Validate admin able to add new class with valid data in mandatory fields
   
     Given Admin is in  class detail popup window
-    When Admin enters all mandatory field values with valid data and clicks save button ( Batch ID , No of Classes, Class Date, Staff Id)
+    When Admin enters all mandatory field values with valid data from "<Sheetname>" and <RowNumber> and clicks save button 
     Then Admin should see new class details is added in the data table
+    
+    Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |1        |
+    
     
     @TC_class_39
-  Scenario: Validate admin able to add new class with invalid data in mandatory fields
+  Scenario Outline: Validate admin able to add new class with invalid data in mandatory fields
   
     Given Admin is in  class detail popup window
-    When Admin enters all mandatory field values with invalid data and clicks save button ( Batch ID , No of Classes, Class Date, Staff Id, )
+    When Admin enters all mandatory field values with invalid data from "<Sheetname>" and <RowNumber> and clicks save button 
     Then Error message should appear in alert
+    
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |2        |
     
     @TC_class_40
-  Scenario: Validate admin able to add new class with valid data  in all fields
+  Scenario Outline: Validate admin able to add new class with valid data  in all fields
   
     Given Admin is in  class detail popup window
-    When Admin enters values in all fields with valid data and clicks save button (Batch ID , No of Classes, Class Date, Class Topic, Staff Id, Class description, Comments, Notes, Recordings)
+    When Admin enters values in all fields with valid data from "<Sheetname>" and <RowNumber> and clicks save button 
     Then Admin should see new class details is added in the data table
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |3        |
+    
     @TC_class_41
-  Scenario: Validate admin able to add new class with invalid data  in optional fields
+  Scenario Outline: Validate admin able to add new class with invalid data  in optional fields
   
     Given Admin is in  class detail popup window
-    When Admin enters with invalid data in optional fields and clicks save button ( Class Topic, Class description, Comments, Notes, Recordings)
+    When Admin enters with invalid data from "<Sheetname>" and <RowNumber> in optional fields and clicks save button 
     Then Error message should appear in alert
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |4        |
+    
     @TC_class_42
-  Scenario: Validate admin able to add new class missing Batch Id
+  Scenario Outline: Validate admin able to add new class missing Batch Id
   
     Given Admin is in  class detail popup window
-    When Admin enters  data missing value in Batch ID and clicks save button (No of Classes, Class Date, Staff Id)
+    When Admin enters  data from "<Sheetname>" and <RowNumber> missing value in Batch ID and clicks save button 
     Then Batch Id is missing alert message should appear
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |5        |
+    
     @TC_class_43
-  Scenario: Validate admin able to add new class missing No of Class
+  Scenario Outline: Validate admin able to add new class missing No of Class
   
     Given Admin is in  class detail popup window
-    When Admin enters data missing value in No of class and clicks save button (Batch ID ,  Class Date, Staff Id, )
+    When Admin enters data from "<Sheetname>" and <RowNumber> missing value in No of class and clicks save button 
     Then No of classes is missing alert message should appear
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |6        |
+    
     @TC_class_44
-  Scenario: Validate admin able to add new class missing Class Date
+  Scenario Outline: Validate admin able to add new class missing Class Date
   
     Given Admin is in  class detail popup window
-    When Admin enters data missing value in  class date and clicks save button (Batch ID , No of Classes, Staff Id, )
+    When Admin enters data from "<Sheetname>" and <RowNumber> missing value in  class date and clicks save button 
     Then Class date is missing alert message should appear
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |7        |
+    
     @TC_class_45
-  Scenario: Validate admin able to add new class missing Staff id
+  Scenario Outline: Validate admin able to add new class missing Staff id
   
     Given Admin is in  class detail popup window
-    When Admin enters data missing value in staff id and clicks save button (Batch ID , No of Classes, Class Date )
+    When Admin enters data from "<Sheetname>" and <RowNumber> missing value in staff id and clicks save button 
     Then staff id is missing alert message should appear
     
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |8        |
+    
      @TC_class_46
-  Scenario: Validate  admin able to add new class passing past date 
+  Scenario Outline: Validate  admin able to add new class passing past date 
   
     Given Admin is in  class detail popup window
-    When Admin enters passed date in the class date field and clicks save button ( Batch ID , No of Classes, Class Date, Staff Id)
+    When Admin enters passed date from "<Sheetname>" and <RowNumber> in the class date field and clicks save button 
     Then class cannot be  created for the passed date alert message should appear
+    
+     Examples:
+   |Sheetname      |RowNumber|
+   |data_class     |9        |
     
     @TC_class_47
   Scenario: Validate date picker

@@ -1,6 +1,7 @@
 package pages;
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,18 +10,27 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import io.cucumber.datatable.DataTable;
+import utilities.ExcelReader;
 
 
 public class Class_POM {
 	WebDriver driver;
+	 String excelPath = "./src/test/resources/assignment_testdata.xlsx" ;
+	 public String Batch_Id,No_of_Classes,Class_Date,Class_Topic,Staff_Id,Class_Description,
+		Comments,Notes,Recording;
+	 public String selectedDate = "5";
+		public String date;
+		
 	
 	public Class_POM(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -65,6 +75,18 @@ public class Class_POM {
 	@FindBy(xpath = "//li[@class='pagination-link next-link']")WebElement paginationControl;
 	@FindBy(xpath = "//li[@class='searchResultTable']")WebElement searchResultTableElement;
 	@FindBy(xpath = "//li[@class='searchResultTable']")WebElement searchResultTableHeaderElement;
+	@FindBy(xpath="//a[@href='/batch_dropdown']")WebElement batchDropdown;
+	@FindBy(xpath = "//*[@class='btn btn-save']")WebElement save_btn;
+	@FindBy(xpath = "//*[@class='btn btn-cancel']")WebElement cancel_btn;
+	@FindBy(xpath = "//div[@class='alert alert-danger']")WebElement classFieldalertMsg;
+	@FindBy(className="day")List<WebElement> dates;
+	@FindBy(xpath = "//table//thead//tr//td[1]")public List<WebElement> batchIdvalues;
+	@FindBy(xpath="input[type='text']")List<WebElement> textBoxes;
+	@FindBy(xpath="//a[@href='/staff_dropdown']")WebElement staffIdDropdown;
+	@FindBy(xpath="//a[@href='/calender']")WebElement calenderIcon;
+	@FindBy(xpath="//a[@href='/close_btn']")WebElement closeButton;
+	@FindBy(xpath="//a[@href='/edit_btn']")WebElement editBtn;
+	@FindBy(xpath = "//div[@class='edit_class']")WebElement editClassPage;
 	
 	public List<WebElement> selectHeaderText(){
 		List<WebElement> headerLinks = driver.findElements((By) headerLinkText);
@@ -80,6 +102,11 @@ public class Class_POM {
 			searchBox.sendKeys(searchedValue);
 			searchBox.sendKeys(Keys.ENTER);
 		}
+	}
+	
+	public void searchValue() {
+		searchBox.sendKeys(searchedValue);
+		searchBox.sendKeys(Keys.ENTER);
 	}
 	
 	//Method to load the search results into a List of Map
@@ -477,13 +504,124 @@ public Boolean isPaginationArrowDisplayed() {
 		Assert.assertEquals(actual_title, expected_title);
   }
 	
+  public void batchDropdown() {
+	  batchDropdown.click();
+  }
+  
+  //Add class
+  
+  public void Enter_Valid_SheetInputs(String Sheetname, int Rownumber) throws IOException, InvalidFormatException,
+	InterruptedException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
+
+ExcelReader reader = new ExcelReader();
+List<Map<String, String>> TestData = reader.getData(excelPath, Sheetname);
+Batch_Id = TestData.get(Rownumber).get("Batch Id");
+No_of_Classes = TestData.get(Rownumber).get("No of Classes");
+Class_Date = TestData.get(Rownumber).get("Class Date");
+Class_Topic = TestData.get(Rownumber).get("Class Topic");
+Staff_Id = TestData.get(Rownumber).get("Staff Id");
+Class_Description = TestData.get(Rownumber).get(" Class Description");
+Comments = TestData.get(Rownumber).get("Comments");
+Notes = TestData.get(Rownumber).get("Notes");
+Recording = TestData.get(Rownumber).get("Recording");
+searchedField = "Batch Id";
+searchedValue = TestData.get(Rownumber).get("Batch Id") ;
+  }
+
+
+public void saveClick() {
+	save_btn.click();
+}
+public void cancelClick() {
+	cancel_btn.click();
+}
 	
+public boolean alertMesg() {
+	return classFieldalertMsg.isDisplayed();
+}
 	
+public void datePicker() {
+
+	for (WebElement cell : dates) {
+
+		String date = cell.getText();
+		if (date.equals(selectedDate)) {
+			cell.click();
+		}
+
+	}
+
+}
+//sort 
+
+
+public void sortAscending() {
+	Actions action = new Actions(driver);
+	for (WebElement HeaderValues : tableHeader) {
+
+		if (HeaderValues.getText().equals("Batch Id")) {
+			action.moveToElement(sortIcon).click();
+
+		}
+	}
+}
+
+public void sortDescending() {
+	Actions action = new Actions(driver);
+	for (WebElement HeaderValues : tableHeader) {
+
+		if (HeaderValues.getText().equals("Batch Id")) {
+			action.doubleClick(sortIcon).perform();
+
+		}
+	}
+}
+
 	
+	//Class detail popup
+
+
+public void newClassClick() {
+	NewClassButton.click();
+}
 	
+public void noOfTextBoxes() {
+	int actualTextboxes = textBoxes.size();
+	int expectedTextboxes = 6;
+	assertEquals(expectedTextboxes, actualTextboxes);
+}
+
+public boolean batchDropdownDisplayed() {
+	return batchDropdown.isDisplayed();
+}	
+public boolean staffIdDropdownDisplayed() {
+	return staffIdDropdown.isDisplayed();
+}
+public boolean calenderIconDisplayed() {
+	return calenderIcon.isDisplayed();
+}
+public boolean saveBtnDisplayed() {
+	return save_btn.isDisplayed();
+}
+
+public boolean cancelBtnDisplayed() {
+	return cancel_btn.isDisplayed();
+}
+public boolean closeBtnDisplayed() {
+	return closeButton.isDisplayed();
+}
+
+//edit
+
+public void editBtnClick() {
+	editBtn.click();
+}
+
+public boolean editClassDisplayed() {
+	return editClassPage.isDisplayed();
 	
-	
-	
+}
+
 	
 	
 	

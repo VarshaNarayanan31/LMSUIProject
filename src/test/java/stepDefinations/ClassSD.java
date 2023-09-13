@@ -6,6 +6,9 @@ import io.cucumber.java.en.When;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.junit.Assert;
 
 
@@ -22,6 +25,9 @@ public class ClassSD {
 	long responsetime;
 	
 	Class_POM classPom = new Class_POM( driver);
+	ArrayList<String> sortedList;
+	ArrayList<String> obtainedListAsc;
+	ArrayList<String> obtainedListDesc;
 	
 	
 	//Feature: Manage Class Page Verification_1
@@ -235,14 +241,12 @@ public class ClassSD {
 	
 	@When("Admin click +Add New Class button")
 	public void admin_click_add_new_class_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.newClassClick();
 	}
 
 	@Then("Admin should see a popup  with  heading {string}")
 	public void admin_should_see_a_popup_with_heading(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.addClassWindow();
 	}
 
 	@Then("Admin should see input fields Text \\(Batch ID , No of Classes, Class Date, Class Topic, Staff Id, Class description, Comments, Notes, Recordings)")
@@ -253,58 +257,50 @@ public class ClassSD {
 
 	@Then("{int} textbox should be  present in Class details popup window")
 	public void textbox_should_be_present_in_class_details_popup_window(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.noOfTextBoxes();
 	}
 
 	@Then("Admin should see  dropdown option for Batch ID")
 	public void admin_should_see_dropdown_option_for_batch_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.batchDropdownDisplayed();
 	}
 
 	@Then("Admin should see  dropdown option for Staff Id")
 	public void admin_should_see_dropdown_option_for_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.staffIdDropdownDisplayed();
 	}
 
 	@Then("Admin should see  calendar icon for class date")
 	public void admin_should_see_calendar_icon_for_class_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.calenderIconDisplayed();
 	}
 
 	@Then("Admin should see  save button in the class detail popup window")
 	public void admin_should_see_save_button_in_the_class_detail_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.saveBtnDisplayed();
 	}
 
 	@Then("Admin should see cancel button in the class detail popup window")
 	public void admin_should_see_cancel_button_in_the_class_detail_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.cancelBtnDisplayed();
 	}
 
 	@Then("Admin should see close button on the class details popup window")
 	public void admin_should_see_close_button_on_the_class_details_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.closeBtnDisplayed();
 	}
 	
 	//Feature: Add New Class 
 	
 	@Given("Admin is in  class detail popup window")
 	public void admin_is_in_class_detail_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.addClassWindow();
+	
 	}
 
 	@When("Admin clicks  Batch ID dropdown")
 	public void admin_clicks_batch_id_dropdown() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.batchDropdown();
 	}
 
 	@Then("Batch id in the drop down should match with Batch id in the manage batch page table")
@@ -313,108 +309,105 @@ public class ClassSD {
 	    throw new io.cucumber.java.PendingException();
 	}
 
-	@When("Admin enters all mandatory field values with valid data and clicks save button \\( Batch ID , No of Classes, Class Date, Staff Id)")
-	public void admin_enters_all_mandatory_field_values_with_valid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters all mandatory field values with valid data from {string} and {int} and clicks save button")
+	public void admin_enters_all_mandatory_field_values_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("Admin should see new class details is added in the data table")
 	public void admin_should_see_new_class_details_is_added_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.searchValue();
+	    classPom.loadSearchResultsIntoListOfMap();
+	    classPom.checkIfSearchItemDisplayed();
 	}
 
-	@When("Admin enters all mandatory field values with invalid data and clicks save button \\( Batch ID , No of Classes, Class Date, Staff Id, )")
-	public void admin_enters_all_mandatory_field_values_with_invalid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters all mandatory field values with invalid data from {string} and {int} and clicks save button")
+	public void admin_enters_all_mandatory_field_values_with_invalid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("Error message should appear in alert")
 	public void error_message_should_appear_in_alert() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
-	@When("Admin enters values in all fields with valid data and clicks save button \\(Batch ID , No of Classes, Class Date, Class Topic, Staff Id, Class description, Comments, Notes, Recordings)")
-	public void admin_enters_values_in_all_fields_with_valid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_class_topic_staff_id_class_description_comments_notes_recordings() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters values in all fields with valid data from {string} and {int} and clicks save button")
+	public void admin_enters_values_in_all_fields_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
-	@When("Admin enters with invalid data in optional fields and clicks save button \\( Class Topic, Class description, Comments, Notes, Recordings)")
-	public void admin_enters_with_invalid_data_in_optional_fields_and_clicks_save_button_class_topic_class_description_comments_notes_recordings() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters with invalid data from {string} and {int} in optional fields and clicks save button")
+	public void admin_enters_with_invalid_data_from_and_in_optional_fields_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
-	@When("Admin enters  data missing value in Batch ID and clicks save button \\(No of Classes, Class Date, Staff Id)")
-	public void admin_enters_data_missing_value_in_batch_id_and_clicks_save_button_no_of_classes_class_date_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters  data from {string} and {int} missing value in Batch ID and clicks save button")
+	public void admin_enters_data_from_and_missing_value_in_batch_id_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("Batch Id is missing alert message should appear")
 	public void batch_id_is_missing_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
-	
+	@When("Admin enters data from {string} and {int} missing value in No of class and clicks save button")
+	public void admin_enters_data_from_and_missing_value_in_no_of_class_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
+	}
 
 	@Then("No of classes is missing alert message should appear")
 	public void no_of_classes_is_missing_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
-	@When("Admin enters data missing value in  class date and clicks save button \\(Batch ID , No of Classes, Staff Id, )")
-	public void admin_enters_data_missing_value_in_class_date_and_clicks_save_button_batch_id_no_of_classes_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters data from {string} and {int} missing value in  class date and clicks save button")
+	public void admin_enters_data_from_and_missing_value_in_class_date_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("Class date is missing alert message should appear")
 	public void class_date_is_missing_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
-	@When("Admin enters data missing value in staff id and clicks save button \\(Batch ID , No of Classes, Class Date )")
-	public void admin_enters_data_missing_value_in_staff_id_and_clicks_save_button_batch_id_no_of_classes_class_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters data from {string} and {int} missing value in staff id and clicks save button")
+	public void admin_enters_data_from_and_missing_value_in_staff_id_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("staff id is missing alert message should appear")
 	public void staff_id_is_missing_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
-	@When("Admin enters passed date in the class date field and clicks save button \\( Batch ID , No of Classes, Class Date, Staff Id)")
-	public void admin_enters_passed_date_in_the_class_date_field_and_clicks_save_button_batch_id_no_of_classes_class_date_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("Admin enters passed date from {string} and {int} in the class date field and clicks save button")
+	public void admin_enters_passed_date_from_and_in_the_class_date_field_and_clicks_save_button(String sheetName, Integer rowNumber) {
+		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		classPom.saveClick();
 	}
 
 	@Then("class cannot be  created for the passed date alert message should appear")
 	public void class_cannot_be_created_for_the_passed_date_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
 	@When("Admin clicks date from date picker")
 	public void admin_clicks_date_from_date_picker() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.datePicker();
 	}
 
 	@Then("selected date should be there in class date text box")
 	public void selected_date_should_be_there_in_class_date_text_box() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Assert.assertEquals(classPom.date, classPom.selectedDate);
 	}
 
 	@Then("selected date should be in  mm\\/dd\\/yyyy format")
@@ -449,8 +442,7 @@ public class ClassSD {
 
 	@When("Admin clicks date picker button")
 	public void admin_clicks_date_picker_button() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		 classPom.datePicker();
 	}
 
 	@Then("Admin should see current date is highlighted in the date picker")
@@ -461,8 +453,7 @@ public class ClassSD {
 
 	@When("Admin clicks date picker button and selects future date")
 	public void admin_clicks_date_picker_button_and_selects_future_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		 classPom.datePicker();
 	}
 
 	@Then("Admin should see selected date is highlighted in the date picker")
@@ -473,117 +464,113 @@ public class ClassSD {
 
 	@When("Admin clicks Cancel button without entering values in the fields")
 	public void admin_clicks_cancel_button_without_entering_values_in_the_fields() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.cancelClick();
 	}
 
 	@Then("Admin should land on Manage Class page")
 	public void admin_should_land_on_manage_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyClassTitle();
 	}
 
 	@When("Admin clicks Cancel button entering values in the fields")
 	public void admin_clicks_cancel_button_entering_values_in_the_fields() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		 classPom.cancelClick();
 	}
 
 	@Then("Admin should land on Manage Class Page and validate new class is not created in the data table")
 	public void admin_should_land_on_manage_class_page_and_validate_new_class_is_not_created_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyClassTitle();
+	    classPom.searchValue();
+	    classPom.loadSearchResultsIntoListOfMap();
+	    classPom.checkIfSearchItemDisplayed();
 	}
+
 
 	//Feature: Edit class Validation_1
 	
 	@Given("Admin is in Manage class page")
 	public void admin_is_in_manage_class_page() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.verifyClassTitle();
 	}
 
 	@When("Admin clicks Edit button in data table")
 	public void admin_clicks_edit_button_in_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.editBtnClick();
 	}
 
 	@Then("Edit popup window appears with heading Class Details")
 	public void edit_popup_window_appears_with_heading_class_details() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    classPom.editClassDisplayed();
 	}
 
 	@When("Admin clicks Edit button from one of the row in data table")
 	public void admin_clicks_edit_button_from_one_of_the_row_in_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.editBtnClick();
 	}
 
 	@Then("Edit popup window appears with same row values in the all fields")
 	public void edit_popup_window_appears_with_same_row_values_in_the_all_fields() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.editClassDisplayed();
 	}
 
 	//Feature: Edit class Validation_2
 	
 	@Given("Admin is in  Edit class detail popup window")
 	public void admin_is_in_edit_class_detail_popup_window() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.editClassDisplayed();
 	}
 
 	@Then("Admin should see particular class details is updated in the data table")
 	public void admin_should_see_particular_class_details_is_updated_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		
+	    classPom.searchValue();
+	    classPom.loadSearchResultsIntoListOfMap();
+	    classPom.checkIfSearchItemDisplayed();
 	}
 
 	@When("Admin enters values in all fields with invalid data and clicks save button \\(Batch ID , No of Classes, Class Date, Class Topic, Staff Id, Class description, Comments, Notes, Recordings)")
 	public void admin_enters_values_in_all_fields_with_invalid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_class_topic_staff_id_class_description_comments_notes_recordings() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.Enter_Valid_SheetInputs("data_class", 2);
+		classPom.saveClick();
 	}
 
 	@When("Admin enters  data missing value in No of Class and clicks save button \\(Batch ID, Class Date, Staff Id)")
 	public void admin_enters_data_missing_value_in_no_of_class_and_clicks_save_button_batch_id_class_date_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.Enter_Valid_SheetInputs("data_class", 6);
+		classPom.saveClick();
 	}
 
 	@Then("No of Class is missing alert message should appear")
 	public void no_of_class_is_missing_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
 	@When("Admin enters  data missing value in Class Date and clicks save button \\(Batch ID, No of class, Staff Id)")
 	public void admin_enters_data_missing_value_in_class_date_and_clicks_save_button_batch_id_no_of_class_staff_id() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.Enter_Valid_SheetInputs("data_class", 7);
+		classPom.saveClick();
 	}
 
 	
 	@When("Admin enters  data missing value in staff id and clicks save button \\(Batch ID, No of class, Class Date)")
 	public void admin_enters_data_missing_value_in_staff_id_and_clicks_save_button_batch_id_no_of_class_class_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.Enter_Valid_SheetInputs("data_class", 8);
+		classPom.saveClick();
 	}
 
 	
 
 	@Then("class cannot be updated for the passed date alert message should appear")
 	public void class_cannot_be_updated_for_the_passed_date_alert_message_should_appear() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.alertMesg();
 	}
 
 	@Then("Admin should land on Manage Class Page and validate particular class details are not changed  in the data table")
 	public void admin_should_land_on_manage_class_page_and_validate_particular_class_details_are_not_changed_in_the_data_table() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		classPom.verifyClassTitle();
+	    classPom.searchValue();
+	    classPom.loadSearchResultsIntoListOfMap();
+	    classPom.checkIfSearchItemDisplayed();
 	}
 	
 	//Feature: Delete class validation_1
@@ -686,25 +673,45 @@ public class ClassSD {
 	
 	@When("Admin click on Batch id column header to sort")
 	public void admin_click_on_batch_id_column_header_to_sort() {
+		sortedList = new ArrayList<>();   
+		for(WebElement wb:classPom.batchIdvalues){
+		sortedList.add(wb.getText());
+		}
+		Collections.sort(sortedList);
+		
+	    classPom.sortAscending();
+	    
+	     obtainedListAsc = new ArrayList<>(); 
+	
+		for(WebElement we:classPom.batchIdvalues){
+		   obtainedListAsc.add(we.getText());
+		}
 	    
 	}
+	
 
 	@Then("Admin should see data table sorted in descending order")
 	public void admin_should_see_data_table_sorted_in_descending_order() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Assert.assertTrue(sortedList.equals(obtainedListDesc));
 	}
 
 	@When("Admin double click on Batch id column header to sort")
 	public void admin_double_click_on_batch_id_column_header_to_sort() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Collections.reverse(sortedList);
+		 classPom.sortDescending();
+		 
+		 obtainedListDesc = new ArrayList<>();
+		 
+		 for(WebElement we:classPom.batchIdvalues){
+			   obtainedListDesc.add(we.getText());
+			}
+		 
 	}
 
 	@Then("Admin should see data table sorted in ascending  order")
 	public void admin_should_see_data_table_sorted_in_ascending_order() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		Assert.assertTrue(sortedList.equals(obtainedListAsc));
+	    
 	}
 
 	//Feature: Pagination in manage class_1
@@ -754,8 +761,11 @@ public class ClassSD {
 
 	@When("Admin creates {int} new class")
 	public void admin_creates_new_class(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		for ( int i = 0; i<6; i++) {
+		classPom.Enter_Valid_SheetInputs("data_class", 1);
+		classPom.saveClick();
+		}
+		
 	}
 
 	@Then("When total class entries above {int} next page is enabled \\( On multiples of {int} new page will be enabled)")
@@ -765,8 +775,10 @@ public class ClassSD {
 
 	@When("Admin creates less than or equal to {int} new class")
 	public void admin_creates_less_than_or_equal_to_new_class(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		for ( int i = 0; i<5; i++) {
+			classPom.Enter_Valid_SheetInputs("data_class", 1);
+			classPom.saveClick();
+			}
 	}
 
 	@Then("When total class entries  {int} or below next page is disabled")
