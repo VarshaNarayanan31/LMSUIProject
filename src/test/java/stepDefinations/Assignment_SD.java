@@ -1,5 +1,8 @@
 package stepDefinations;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,7 +111,7 @@ public class Assignment_SD {
 
 	@Then("Edit Icon in each row of the data table should only appear when entries are available")
 	public void edit_icon_in_each_row_of_the_data_table_should_only_appear_when_entries_are_available() {
-		Assign.emptyField();
+		Assign.c
 	}
 
 	@Then("Edit Icon should not be present in the data table")
@@ -250,12 +253,7 @@ public class Assignment_SD {
 	    throw new io.cucumber.java.PendingException();
 	}
 
-	@Given("Admin is on the {string} Page")
-	public void admin_is_on_the_page(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
-	}
-
+	
 	@When("Admin clicks the {string} button")
 	public void admin_clicks_the_button(String NewAssignmentButton) {
 	    Assign.AssignButtonClick();
@@ -427,6 +425,225 @@ public class Assignment_SD {
 	public void admin_should_able_to_land_on_login_page() {
 	   Assign.verifyLoginTitle();
 	   
+	}
+	
+//Delete assignment
+	
+	@When("Admin clicks delete button in data table row level")
+	public void admin_clicks_delete_button_in_data_table_row_level() {
+		Assign.deleteBtnRightclk();
+	}
+
+	@Then("Admin should see alert")
+	public void admin_should_see_alert() {
+		Assign.deleteAlertMessage();
+	   
+	}
+
+	@Then("Alert should have {string} button to accept")
+	public void alert_should_have_button_to_accept(String yes) {
+		Assign.yesBtn();
+	   
+	}
+
+	@Then("Alert should have {string} button to reject")
+	public void alert_should_have_button_to_reject(String no) {
+	  Assign.noBtn();
+	}
+
+	//Delete Assignment 2
+
+	@Given("Admin is in delete alert")
+	public void admin_is_in_delete_alert() {
+		Assign.deleteAlertWindow();
+	}
+
+	@When("Admin clicks yes button")
+	public void admin_clicks_yes_button() {
+		Assign.yesButtonClick();
+	}
+
+	@Then("Success message and validate particular Assignment details are deleted from the data table")
+	public void success_message_and_validate_particular_assignment_details_are_deleted_from_the_data_table() {
+		Assign.successMessage();
+	}
+
+	@When("Admin clicks no button")
+	public void admin_clicks_no_button() {
+		Assign.noButtonClick();
+	}
+
+	@Then("Admin should land on manage Assignment page and validate particular Assignment details are not deleted from the data table")
+	public void admin_should_land_on_manage_assignment_page_and_validate_particular_assignment_details_are_not_deleted_from_the_data_table() {
+		Assign.verifyAssignTitle();
+		Integer deleteElement = Assign.chkDeletedRow();
+		assertNotEquals(0, deleteElement, "Row is deleted");
+	}
+//Delete multiple assignment1
+
+	@When("Admin clicks single row level check box in the data table")
+	public void admin_clicks_single_row_level_check_box_in_the_data_table() {
+		Assign.singleChkBox();
+	}
+
+	@Then("Admin should see delete icon below the header is enabled")
+	public void admin_should_see_delete_icon_below_the_header_is_enabled() {
+		Assign.headerDeleteEnabled();
+	}
+
+	@Then("Admin should see tick mark in check box")
+	public void admin_should_see_tick_mark_in_check_box() {
+		Assign.tickChkBox();
+	}
+
+	@When("Admin clicks multiple row level check box in the data table")
+	public void admin_clicks_multiple_row_level_check_box_in_the_data_table() {
+		Assign.multipleChkBox();
+	}
+
+	@Then("Admin should see tick mark in check box  of the selected rows")
+	public void admin_should_see_tick_mark_in_check_box_of_the_selected_rows() {
+		Assign.tickMultiChkBox();
+	}
+
+//delete multiple assignment3
+
+	@Then("Admin should land on manage assignment page and validate particular assignment details are deleted from the data table")
+	public void admin_should_land_on_manage_assignment_page_and_validate_particular_assignment_details_are_deleted_from_the_data_table() {
+
+		Assign.verifyAssignTitle();
+		Integer deleteElement = Assign.chkDeletedRow();
+		assertEquals(0, deleteElement, "Row is deleted");
+	}
+
+//add assignment
+
+	@Given("Admin is in  assignment details popup window")
+	public void admin_is_in_assignment_details_popup_window() {
+		Assign.assignpopWindowTitle();
+		// LoggerLoad.info("Admin is in assignment details pop up window");
+	}
+
+	@When("Admin enters all mandatory field values with valid data from <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_all_mandatory_field_values_with_valid_data_from_sheet_Name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Admin should see new assignment details is added in the data table")
+	public void admin_should_see_new_assignment_details_is_added_in_the_data_table() {
+
+		// Assert.assertTrue(dataTable.getText().contains("ExpectedData"));
+	}
+
+	@When("Admin enters all mandatory field values with invalid data from <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_all_mandatory_field_values_with_invalid_data_from_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Error message should appear in alert")
+	public void error_message_should_appear_in_alert() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters values in all fields with valid data <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_values_in_all_fields_with_valid_data_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@When("Admin enters with invalid data in optional fields <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_with_invalid_data_in_optional_fields_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@When("Admin enters  data missing value in program name <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_data_missing_value_in_program_name_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Program name is missing")
+	public void program_name_is_missing() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters  data missing value in batch number <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_data_missing_value_in_batch_number_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Batch number is missing")
+	public void batch_number_is_missing() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters  data missing value in assignment name <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_data_missing_value_in_assignment_name_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Assignment name is missing")
+	public void assignment_name_is_missing() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters  data missing value in due date <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_data_missing_value_in_due_date_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("due date is missing")
+	public void due_date_is_missing() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters  data missing value in grade by <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_data_missing_value_in_grade_by_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("grade by is missing")
+	public void grade_by_is_missing() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin enters Passed date in the due date field <sheetName> and <rowNumber> and clicks save button")
+	public void admin_enters_passed_date_in_the_due_date_field_sheet_name_and_row_number_and_clicks_save_button(
+			String sheetName, int rowNumber) {
+		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.saveBtnClick();
+	}
+
+	@Then("Assignment cannot be created for the passed date")
+	public void assignment_cannot_be_created_for_the_passed_date() {
+		Assign.alertMesg();
+	}
+
+	@When("Admin clicks date from date picker")
+	public void admin_clicks_date_from_date_picker() {
+		Assign.datePicker();
+	}
+
+	@Then("selected date should be their in class date text box")
+	public void selected_date_should_be_their_in_class_date_text_box() {
+		Assert.assertEquals(Assign.date, Assign.selectedDate);
 	}
 
 }

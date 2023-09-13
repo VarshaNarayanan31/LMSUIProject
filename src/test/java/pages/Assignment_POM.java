@@ -2,10 +2,12 @@ package pages;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -15,6 +17,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import io.cucumber.messages.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import utilities.ExcelReader;
+
 public class Assignment_POM {
 
 	WebDriver driver;
@@ -22,7 +27,12 @@ public class Assignment_POM {
 	public String assignmentDescription;
 	public String assignmentDuedate;
 	public String gradeValue;
-
+	public String Program_name,Batch_number,Assignment_Name,Assignment_Description,grade_by,Assignment_duedate,
+	Assignment_file1,Assignment_file2,Assignment_file3,Assignment_file4,Assignment_file5;
+    String excelPath = "/Users/uvaraj/git/LMS_Cucumber_Crunchers/src/test/resources/assignment_testdata.xlsx" ;
+	public String selectedDate = "5";
+	public String date;
+	
 	public Assignment_POM(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
@@ -61,8 +71,17 @@ public class Assignment_POM {
     @FindBy(xpath = "//*[contains(text(),'Cancel')]")WebElement cancelBtn;
     @FindBy(xpath = "//*[contains(text(),'Delete')]")WebElement deleteBtn;
     @FindBy(xpath= "//*[@id='ctl00_cntclose_img")WebElement closeIcon;
-   
-    
+    @FindBy(xpath = "//div[@class='alert alert-primary']")WebElement delete_alertMsg;
+    @FindBy(xpath = "//*[@class='btn btn-yes']")WebElement yes_btn;
+	@FindBy(xpath = "//*[@class='btn btn-no']")WebElement no_btn;
+	@FindBy(xpath = "//div[@class='delete']")WebElement deleteAlertPage;
+	@FindBy(xpath = "//div[@class='success']")WebElement successMsg;
+	@FindBy(xpath = "//div[@class='delete_element']")public List<WebElement> deletedElements;
+	@FindBy(xpath = "//div[@class='alert alert-danger']")WebElement AssignFieldalertMsg;
+	@FindBy(xpath = "//table//thead//tr//th//input")WebElement multiCheckbox;
+	@FindBy(id = "deleteButton")WebElement headerLevelDeleteIcon;
+	@FindBy(className="day")List<WebElement> dates;
+	
 	public void Assignmentlnk() {
 		assignmentLnk.click();
 	}
@@ -122,7 +141,6 @@ public class Assignment_POM {
 
 	public void headerValidation() {
 
-
 		List<String> expectedHeaders = Arrays.asList("check box symbol", "Assignment name", "Assignment description",
 				"Assignment Date", "Assignment Grade", "Edit Delete");
 		List<String> actualHeaders = new ArrayList<>();
@@ -146,6 +164,7 @@ public class Assignment_POM {
 			System.out.println("editButton on right is not displayed");
 		}
 	}
+	
 
 	public void deleteBtnRightclk() {
 		deleteOnRight_btn.click();
@@ -246,7 +265,6 @@ public class Assignment_POM {
 		assertEquals(expectedText, actualText);
 
 	}
-  
 
 	public void sortIcon() {
 
@@ -261,50 +279,58 @@ public class Assignment_POM {
 			}
 		}
 	}
-		
+
 	public void footerText() {
-		
+
 		String actualText = footerText.getText();
-		String value =footerText.getText();
-		value= value.replaceAll("[^0-9]+", " ").trim();
+		String value = footerText.getText();
+		value = value.replaceAll("[^0-9]+", " ").trim();
 		String expectedText = "In total there are" + value + "of assignments";
 		assertEquals(expectedText, actualText);
-	} 
-	
+	}
+
 //Assignment details pop up
 	public void AssignButtonClick() {
 		NewAssignButton.click();
 	}
-	
-	public void popWindowTitle() {
+
+	public void assignpopWindowTitle() {
 		String actualTitle = assignmentDetails.getText();
 		String expectedTitle = "Assignment Details";
 		Assert.assertEquals(actualTitle, expectedTitle);
-		
+
 	}
+
 	public void noOfTextBoxes() {
 		int actualTextboxes = textBoxes.size();
 		int expectedTextboxes = 8;
 		assertEquals(expectedTextboxes, actualTextboxes);
 	}
+
 	public void batchNodropdown() {
-		 Assert.assertTrue(batchNoDropdown.isDisplayed());
+		Assert.assertTrue(batchNoDropdown.isDisplayed());
 	}
+
 	public void programNameDropdown() {
-		 Assert.assertTrue(programNameDropdown.isDisplayed());	
+		Assert.assertTrue(programNameDropdown.isDisplayed());
 	}
+
 	public void validateCalendarIcon() {
 		Assert.assertTrue(calendarIcon.isDisplayed());
 	}
+
 	public void validateSaveBtn() {
 		Assert.assertTrue(saveBtn.isDisplayed());
 	}
+
 	public void validateCancelBtn() {
-			Assert.assertTrue(cancelBtn.isDisplayed());	
+		Assert.assertTrue(cancelBtn.isDisplayed());
 	}
+
 	public void validatDeleteBtn() {
 		Assert.assertTrue(deleteBtn.isDisplayed());
 	}
+
 	public void closeIcon() {
 		Assert.assertTrue(closeIcon.isDisplayed());
 	}
@@ -313,89 +339,195 @@ public class Assignment_POM {
 	public void clickProgram() {
 		programLnk.click();
 	}
+
 	public void clickUser() {
 		userLnk.click();
 	}
+
 	public void clickAttendance() {
 		attendanceLnk.click();
 	}
+
 	public void clickClass() {
 		classLnk.click();
-		
+
 	}
+
 	public void clickBatch() {
 		batchLnk.click();
 	}
+
 	public void clickLogout() {
 		logoutLnk.click();
 	}
+
 	public void clickStudent() {
 		studentLnk.click();
 	}
-	
-    public void verifyProgramTitle() {
-    	String actual_title = driver.getTitle();
+
+	public void verifyProgramTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage Program";
-		Assert.assertEquals(actual_title, expected_title);	
-}
-    public void verifyStudentTitle() {
-    	String actual_title = driver.getTitle();
+		Assert.assertEquals(actual_title, expected_title);
+
+	}
+
+	public void verifyStudentTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage Student";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    
-    public void verifyBatchTitle() {
-    	String actual_title = driver.getTitle();
+
+	}
+
+	public void verifyBatchTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage Batch";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    
-    public void verifyAttendanceTitle() {
-    	String actual_title = driver.getTitle();
+
+	}
+
+	public void verifyAttendanceTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage Attendance";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    public void verifyUserTitle() {
-    	String actual_title = driver.getTitle();
+	}
+
+	public void verifyUserTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage User";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    
-    public void verifyClassTitle() {
-    	String actual_title = driver.getTitle();
+	}
+
+	public void verifyClassTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Manage Class";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    
-    public void verifyLoginTitle() {
-    	String actual_title = driver.getTitle();
+	}
+
+	public void verifyLoginTitle() {
+		String actual_title = driver.getTitle();
 		String expected_title = "Please login to LMS application";
 		Assert.assertEquals(actual_title, expected_title);
-    }
-    
+	}
+
 //sort function 
-    
-    public void sortAscending() {
-    	Actions action = new Actions(driver);
+
+	public void sortAscending() {
+		Actions action = new Actions(driver);
 		for (WebElement HeaderValues : tableHeader) {
 
 			if (HeaderValues.getText().equals("Assignment Name")) {
 				action.moveToElement(sortIcon).click();
-					
+
 			}
 		}
 	}
 
-    public void sortDescending() {
-	Actions action = new Actions(driver);
-	for (WebElement HeaderValues : tableHeader) {
+	public void sortDescending() {
+		Actions action = new Actions(driver);
+		for (WebElement HeaderValues : tableHeader) {
 
-		if (HeaderValues.getText().equals("Assignment Name")) {
-			action.doubleClick(sortIcon).perform();
-		
+			if (HeaderValues.getText().equals("Assignment Name")) {
+				action.doubleClick(sortIcon).perform();
+
+			}
 		}
 	}
-}
-}
 
+//Delete assignment validation
+	public boolean deleteAlertMessage() {
+		return delete_alertMsg.isDisplayed();
+	}
 
+	public Boolean yesBtn() {
+		return yes_btn.isDisplayed();
+	}
+
+	public Boolean noBtn() {
+		return no_btn.isDisplayed();
+	}
+
+	public boolean deleteAlertWindow() {
+		return deleteAlertPage.isDisplayed();
+	}
+
+	public void yesButtonClick() {
+		yes_btn.click();
+	}
+
+	public void noButtonClick() {
+		no_btn.click();
+	}
+
+	public boolean successMessage() {
+		return successMsg.isDisplayed();
+
+	}
+
+	public Integer chkDeletedRow() {
+		return deletedElements.size();
+
+	}
+
+	public void singleChkBox() {
+		checkbox.click();
+	}
+
+	public void multipleChkBox() {
+		multiCheckbox.click();
+	}
+
+	public void headerDeleteEnabled() {
+		headerLevelDeleteIcon.isEnabled();
+	}
+
+	public void tickChkBox() {
+		checkbox.isSelected();
+	}
+
+	public void tickMultiChkBox() {
+		multiCheckbox.isSelected();
+	}
+
+// Add assignments
+
+	public void Enter_Valid_SheetInputs(String Sheetname, int Rownumber) throws IOException, InvalidFormatException,
+			InterruptedException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
+
+		ExcelReader reader = new ExcelReader();
+		List<Map<String, String>> TestData = reader.getData(excelPath, Sheetname);
+		Program_name = TestData.get(Rownumber).get("Program name");
+		Batch_number = TestData.get(Rownumber).get("Batch number");
+		Assignment_Name = TestData.get(Rownumber).get("Assignment Name");
+		Assignment_Description = TestData.get(Rownumber).get("Assignment Description");
+		grade_by = TestData.get(Rownumber).get("grade by");
+		Assignment_duedate = TestData.get(Rownumber).get(" Assignment due date");
+		Assignment_file1 = TestData.get(Rownumber).get("Assignmentfile1");
+		Assignment_file2 = TestData.get(Rownumber).get("Assignmentfile2");
+		Assignment_file3 = TestData.get(Rownumber).get("Assignmentfile3");
+		Assignment_file4 = TestData.get(Rownumber).get("Assignmentfile4");
+		Assignment_file5 = TestData.get(Rownumber).get("Assignmentfile5");
+
+	}
+
+	public boolean alertMesg() {
+		return AssignFieldalertMsg.isDisplayed();
+	}
+
+	public void saveBtnClick() {
+		saveBtn.click();
+	}
+
+	public void datePicker() {
+
+		for (WebElement cell : dates) {
+
+			String date = cell.getText();
+			if (date.equals(selectedDate)) {
+				cell.click();
+			}
+
+		}
+
+	}
+}
