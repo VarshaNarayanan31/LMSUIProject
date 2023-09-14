@@ -19,6 +19,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
 import io.cucumber.datatable.DataTable;
 import utilities.ExcelReader;
 
@@ -87,6 +89,15 @@ public class Class_POM {
 	@FindBy(xpath="//a[@href='/close_btn']")WebElement closeButton;
 	@FindBy(xpath="//a[@href='/edit_btn']")WebElement editBtn;
 	@FindBy(xpath = "//div[@class='edit_class']")WebElement editClassPage;
+	@FindBy(xpath = "//Select[@id ='no_of_classes'] ") WebElement NoOfClassesTextBox;
+	@FindBy(xpath = "//Select[@id ='Batch id'] ") WebElement BatchIdTextBox;
+	@FindBy(xpath = "//input[@id ='class_date'] ") WebElement classDateTextBox;
+	@FindBy(xpath = "//input[@id ='class_topic'] ") WebElement classTopicTextBox;
+	@FindBy(xpath = "//input[@id ='class_desc'] ") WebElement classDescriptionTextBox;
+	@FindBy(xpath = "//input[@id = 'staff_id']") WebElement staffIdTextBox;
+	@FindBy(xpath = "//input[@id ='comments'] ") WebElement commentsTextBox;
+	@FindBy(xpath = "//input[@id ='notes'] ") WebElement notesTextBox;
+	@FindBy(xpath = "//input[@id ='recording'] ") WebElement recordingTextBox;
 	
 	public List<WebElement> selectHeaderText(){
 		List<WebElement> headerLinks = driver.findElements((By) headerLinkText);
@@ -530,7 +541,22 @@ searchedField = "Batch Id";
 searchedValue = TestData.get(Rownumber).get("Batch Id") ;
   }
 
-
+  public void passValue() {
+	  batchDropdown.click();
+	  Select select = new Select(BatchIdTextBox);
+	  select.selectByVisibleText(Batch_Id);
+	  staffIdDropdown.click();
+	  Select select1 = new Select(staffIdTextBox);
+	  select1.selectByVisibleText(Staff_Id);
+	  NoOfClassesTextBox.sendKeys(No_of_Classes);
+	  classDateTextBox.sendKeys(Class_Date);
+	  classTopicTextBox.sendKeys(Class_Topic);
+	  classDescriptionTextBox.sendKeys(Class_Description);
+	  commentsTextBox.sendKeys(Comments);
+	  notesTextBox.sendKeys(Notes);
+	  recordingTextBox.sendKeys(Recording);
+	  }
+ 
 public void saveClick() {
 	save_btn.click();
 }
