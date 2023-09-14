@@ -1,10 +1,5 @@
 package pages;
 
-
-import baseClass.TestBase;
-
-public class Dashboard_POM extends TestBase {
-
 import java.util.List;
 
 import org.openqa.selenium.By;
