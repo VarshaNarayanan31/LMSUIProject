@@ -246,6 +246,20 @@ public class Login_POM extends TestBase {
     }
 
 //reset password for Admin clicks reset password link after  reaching in login page
+public void verify_reset_Page() {
+
+    String resetTitle = driver.getTitle();
+
+    Assert.assertEquals("Reset password Page",resetTitle);
+}
+    public void verify_submit_link_position() {
+
+        int idX1 = SubmitBtn.getLocation().x;
+
+        int idX2 = SubmitBtn.getLocation().y;
+
+        Assert.assertEquals(idX1, idX2);
+    }
 
  public void EnableIcon1() {
 
@@ -269,29 +283,57 @@ public class Login_POM extends TestBase {
         }
     }
 
-    public void NewPasswordTxt(String username)
+    public void NewPasswordTxt(String Password)
     {
-        Type_NewPwdTxt.sendKeys(username);
+        Type_NewPwdTxt.sendKeys(Password);
     }
 
     public void RetypePasswordTxt(String Password) {
 
         RetypePassword.sendKeys(Password);
     }
+    public boolean verifyType_NewPwdTxt() {
 
+        return Type_NewPwdTxt.isDisplayed();
+
+    }
+    public boolean verifyRetypePassword() {
+
+        return RetypePassword.isDisplayed();
+    }
     public void SubmitBtnClick() {
 
         SubmitBtn.click();
     }
+
+    public String Type_NewPwdTxt(String expectedmsg) {
+
+        return Type_NewPwdTxt.getText();
+    }
+    public String RetypePassword(String expectedmsg) {
+
+        return RetypePassword.getText();
+    }
     //doubt // verify 3 scenarios for valid, invalid,empty,mismatch
+    public void ValidateResetPassworderror()
+    {
+        String TxtResetPwd = RetypePassword_btn.getText();
+
+        Assert.assertNotEquals("Please check your Password",TxtResetPwd);
+
+    }
     public void ValidateResetPassword() {
 
         String TxtResetPwd = RetypePassword_btn.getText();
 
         Assert.assertEquals("Your password has been reset", TxtResetPwd);
 
+
+
         System.out.println("Admin is on will receive messsage" + TxtResetPwd);
     }
+
+
 
 
 

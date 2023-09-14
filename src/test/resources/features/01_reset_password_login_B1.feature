@@ -31,10 +31,6 @@ Feature: Reset password Verification for home page still not login
 
     Then Admin should see "Type in new password" in the first label text
 
-  Scenario: Verify first label text
-
-    Then Admin should see "Type in new password" in the first label text
-
   Scenario: Verify second label text
 
     Then Admin should see "Retype password" in the second label text
@@ -42,8 +38,6 @@ Feature: Reset password Verification for home page still not login
   Scenario: verify text box is in disabled
 
     Then Admin should see text box in disabled state
-
-
 
 
 

@@ -19,9 +19,6 @@ Feature: Manage Attendance Page verification
   Scenario: Verify LMS title
     Then Admin should see "LMS -Learning management system"  as title
 
-  Scenario: Verify the alignment of the Manage Attendance header
-    Then Manage attendance header should be in left side of the page
-
   Scenario: Validate text in manage attendancepage
     Then Admin should see correct spelling for the all the fields in get all text from the portal page
 
@@ -66,6 +63,3 @@ Feature: Manage Attendance Page verification
 
   Scenario: Validate footer  text
     Then Admin should see the text with total number classes in the data table. ( " In total there are number of classes")
-
-
-

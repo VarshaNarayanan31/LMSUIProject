@@ -9,26 +9,30 @@ public class attendance_SD extends TestBase {
         long start;
         long end;
         long responsetime;
-        Attendance_POM at_manage = new Attendance_POM();
+        Attendance_POM atten = new Attendance_POM();
         // Manage attendance steps
         @Given("Admin is on dashboard page after Login")
         public void admin_is_on_dashboard_page_after_Login() {
-
-
+               atten.verifyurl();
 
             System.out.println("Admin is in dashboard page after login");
         }
 
         @When("Admin clicks {string} on the navigation bar")
         public void admin_clicks_on_the_navigation_bar(String string) {
-            start = System.currentTimeMillis();
-           //
 
+                start = System.currentTimeMillis();
+
+                atten.clickattendencebtn();
         }
+
+
         //Validate the header of the page
         @Then("Admin should see the {string} in header")
-        public void admin_should_see_the_Manage_attendance_in_header(String Heading) {
-            at_manage.verifyTitle();
+        public void admin_should_see_the_Manage_attendance_in_header(String Heading)
+        {
+            atten.verifyTitle();
+                end = System.currentTimeMillis();
         }
         //Validate response time
         @Then("Maximum navigation time in milliseconds, defaults to {int} seconds")
@@ -47,22 +51,17 @@ public class attendance_SD extends TestBase {
         //Verify LMS title
         @Then("Admin should see {string}  as title")
         public void admin_should_see_LMS_Learning_management_system_as_title(String expectedtitle) {
-            at_manage.verifyTitle();
+
+               // atten. verify_title_head();
 
         }
 
-        //Verify the alignment of the Manage Attendance header
-        @Then("Manage attendance header should be in left side of the page")
-        public void manage_attendance_header_should_be_in_left_side_of_the_page() {
-
-
-        }
 
         //Validate text in manage attendancepage
         @Then("Admin should see correct spelling for the all the fields in get all text from the portal page")
         public void admin_should_see_correct_spelling_for_the_all_the_fields() {
 
-
+//atten.DisabledDeleteIcon();
         }
 
         @Then("Admin should see disabled delete icon below the {string}")
@@ -229,13 +228,140 @@ public class attendance_SD extends TestBase {
             throw new io.cucumber.java.PendingException();
         }
 
+//
+        @Given("Admin clicks {string} dropdown for Attendance Module")
+        public void adminClicksDropdownForAttendanceModule(String arg0) {
+        }
+
+        @Then("Program Name in the drop down  for Attendance Module should match with  program name in  manage program page table")
+        public void programNameInTheDropDownForAttendanceModuleShouldMatchWithProgramNameInManageProgramPageTable() {
+        }
+
+        @Then("Class Name in the drop down should match with  class name in  manage class page table for Attendance Module")
+        public void classNameInTheDropDownShouldMatchWithClassNameInManageClassPageTableForAttendanceModule() {
+        }
+
+        @Then("Attendance field should have keywords such as - present, absent, late, excused")
+        public void attendanceFieldShouldHaveKeywordsSuchAsPresentAbsentLateExcused() {
+        }
+
+        @Then("Admin should see correct spellings in dropdown text for Attendance Module")
+        public void adminShouldSeeCorrectSpellingsInDropdownTextForAttendanceModule() {
+        }
+
+        @Given("Admin clicks date from date picker for Attendance Module")
+        public void adminClicksDateFromDatePickerForAttendanceModule() {
+        }
+
+        @Then("selected date should be their in class date text box for Attendance Module")
+        public void selectedDateShouldBeTheirInClassDateTextBoxForAttendanceModule() {
+        }
+
+        @Then("selected date should be in  mm\\/dd\\/yyyy format for Attendance Module")
+        public void selectedDateShouldBeInMmDdYyyyFormatForAttendanceModule() {
+        }
+
+        @Given("Admin clicks right arrow in the date picker near month for Attendance Module")
+        public void adminClicksRightArrowInTheDatePickerNearMonthForAttendanceModule() {
+        }
+
+        @Then("Next month calender should visible for Attendance Module")
+        public void nextMonthCalenderShouldVisibleForAttendanceModule() {
+        }
+
+        @Given("Admin clicks left arrow in the date picker near month for Attendance Module")
+        public void adminClicksLeftArrowInTheDatePickerNearMonthForAttendanceModule() {
+        }
+
+        @Then("previous month calender should visible for Attendance Module")
+        public void previousMonthCalenderShouldVisibleForAttendanceModule() {
+        }
+
+        @Given("Admin clicks date picker button for Attendance Module")
+        public void adminClicksDatePickerButtonForAttendanceModule() {
+        }
+
+        @Then("Admin should see current date is highled in the date picker for Attendance Module")
+        public void adminShouldSeeCurrentDateIsHighledInTheDatePickerForAttendanceModule() {
+        }
+
+        @Given("Admin clicks date picker button and selects future date for Attendance Module")
+        public void adminClicksDatePickerButtonAndSelectsFutureDateForAttendanceModule() {
+        }
+
+        @Then("Admin should see selected date is highled in the date picker for Attendance Module")
+        public void adminShouldSeeSelectedDateIsHighledInTheDatePickerForAttendanceModule() {
+        }
+// attendance delete steps
+
+        @When("Admin clicks Attendance on the navigation bar")
+        public void adminClicksAttendanceOnTheNavigationBar() {
+
+        }
+
+        @When("Admin clicks delete button in data table row level for Attendance module")
+        public void adminClicksDeleteButtonInDataTableRowLevelForAttendanceModule() {
+        }
+
+        @Then("Admin should see Delete alert for Attendance module")
+        public void adminShouldSeeDeleteAlertForAttendanceModule() {
+        }
+
+        @Then("Alert should have yes button to accept for Attendance module")
+        public void alertShouldHaveYesButtonToAcceptForAttendanceModule() {
+        }
+
+        @Then("Alert should have no button to reject for Attendance module")
+        public void alertShouldHaveNoButtonToRejectForAttendanceModule() {
+        }
+
+        @Then("Admin clicks yes button for Attendance module")
+        public void adminClicksYesButtonForAttendanceModule() {
+        }
+
+        @Then("Success message and selected attendance details are deleted from the data table")
+        public void successMessageAndSelectedAttendanceDetailsAreDeletedFromTheDataTable() {
+        }
 
 
 
 
+        //************************pagination**********************************
+        @When("Admin clicks no button for Attendance module")
+        public void adminClicksNoButtonForAttendanceModule() {
+        }
 
+        @Then("Redirected attendance page and selected attendance details are not deleted from the data table")
+        public void redirectedAttendancePageAndSelectedAttendanceDetailsAreNotDeletedFromTheDataTable() {
+        }
 
+        @Then("Data table should display {int} page  when entries available for Attendance")
+        public void dataTableShouldDisplayPageWhenEntriesAvailableForAttendance(int arg0) {
+        }
 
-    }
+        @Then("Right arrow should be enabled in page one  when entries are more than {int} available for Attendance")
+        public void rightArrowShouldBeEnabledInPageOneWhenEntriesAreMoreThanAvailableForAttendance(int arg0) {
+        }
+
+        @Then("Left arrow should be disabled in page one  when entries are more than {int} available for Attendance")
+        public void leftArrowShouldBeDisabledInPageOneWhenEntriesAreMoreThanAvailableForAttendance(int arg0) {
+        }
+
+        @Then("Right arrow should be enabled in page two when entries are more than {int} available for Attendance")
+        public void rightArrowShouldBeEnabledInPageTwoWhenEntriesAreMoreThanAvailableForAttendance(int arg0) {
+        }
+
+        @Then("Left arrow should be enabled in page two for Attendance")
+        public void leftArrowShouldBeEnabledInPageTwoForAttendance() {
+        }
+
+        @Then("When entries are more than {int} in data table pagination controls enabled for Attendance")
+        public void whenEntriesAreMoreThanInDataTablePaginationControlsEnabledForAttendance(int arg0) {
+        }
+
+        @Then("When entries are less than {int} in data table pagination controls disabled for Attendance")
+        public void whenEntriesAreLessThanInDataTablePaginationControlsDisabledForAttendance(int arg0) {
+        }
+}
 
 

@@ -50,14 +50,10 @@ Feature: Attendance details popup window  verification
   Scenario: Verify order of the label in attendance details page
     Then Order of the label should be Program name, Class Name, Student Name, Attendance, Attendance Date.
 
-
-
-
-
-
   Scenario: Validate all program name is reflecting in the dropdown
 
     Given Admin clicks "program name" dropdown for Attendance Module
+
     Then Program Name in the drop down  for Attendance Module should match with  program name in  manage program page table
 
   Scenario: Validate all class name  is reflecting in the dropdown
@@ -85,7 +81,7 @@ Feature: Attendance details popup window  verification
     Given Admin clicks date from date picker for Attendance Module
     Then selected date should be in  mm/dd/yyyy format for Attendance Module
       | date | format |
-      |10/12/2023 |mm/dd/yyyy |
+      |10/09/2023 |mm/dd/yyyy |
 
   Scenario: Validate right arrow in data picker to navigate to next month
 

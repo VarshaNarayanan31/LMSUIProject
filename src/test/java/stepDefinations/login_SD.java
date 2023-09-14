@@ -46,6 +46,7 @@ public class login_SD extends TestBase {
     public void adminShouldSeeTwoTextField() {
 
         login.userName_txt();
+
         login.password_txt();
     }
 
@@ -55,21 +56,10 @@ public class login_SD extends TestBase {
         login.User_Header_text("user");
     }
 
-    @Then("Admin should see * symbol next to user text")
-    public void adminShouldSeeSymbolNextToUserText() {
-
-        //pending
-    }
-
     @Then("Admin should {string} in the second text field")
     public void adminShouldInTheSecondTextField(String arg0) {
 
-       login.Pass_Header_text("password");
-    }
-    //pending
-    @Then("Admin should see * symbol next to password text")
-    public void adminShouldSeeSymbolNextToPasswordText() {
-
+        login.Pass_Header_text("password");
     }
 
     @Then("Admin should see input field on the centre of the page")
@@ -275,24 +265,6 @@ public class login_SD extends TestBase {
 
         login.SendLinkClick();
     }
-//doubt
-    @Then("Admin should receive link in mail for reset username \\/ password")
-
-    public void adminShouldReceiveLinkInMailForResetUsernamePassword() {
-
-
-
-     }
-
-    @When("Admin enters invalid email id and clicks send link button")
-    public void adminEntersInvalidEmailIdAndClicksSendLinkButton() {
-
-    }
-
-    @Then("Admin should not receive link in mail for reset username / password")
-    public void adminShouldNotReceiveLinkInMailForResetUsernamePassword() {
-    }
-
 
 //*********step definition for reset password 1************
 
@@ -302,48 +274,61 @@ public class login_SD extends TestBase {
 
     @When("Admin clicks reset password link")
     public void adminClicksResetPasswordLink() {
-
+        login.ResetPwdBtnClick();
     }
 
     @Then("Admin should land on reset password page")
     public void adminShouldLandOnResetPasswordPage() {
+        login.verify_reset_Page();
     }
 
     @Then("Admin should see submit {string}  button")
     public void adminShouldSeeSubmitButton(String arg0) {
-
+        login.SubmitBtnClick();
     }
 
     @Then("Admin should see submit button in center of the page")
     public void adminShouldSeeSubmitButtonInCenterOfThePage() {
+        login.verify_submit_link_position();
     }
 
     @Then("Admin should see two text box")
     public void adminShouldSeeTwoTextBox() {
-    }
 
+        login.verifyType_NewPwdTxt();
+
+        login.verifyRetypePassword();
+    }
     @Then("Admin should see {string} in the first label text")
     public void adminShouldSeeInTheFirstLabelText(String arg0) {
+
+        login.Type_NewPwdTxt("Type in new password");
+
     }
 
     @Then("Admin should see {string} in the second label text")
     public void adminShouldSeeInTheSecondLabelText(String arg0) {
+
+        login.RetypePassword("Retype password");
     }
 
     @Then("Admin should see text box in disabled state")
     public void adminShouldSeeTextBoxInDisabledState() {
 
-    }
+        login.EnableIcon1();
 
+    }
 
 
 ////*********step definition for reset password 2************
     @Given("Admin reset password page")
     public void adminResetPasswordPage() {
+        login.verify_reset_Page();
     }
 
     @When("Admin clicks on type in new password field")
     public void adminClicksOnTypeInNewPasswordField() {
+        login.ResetPwdBtnClick();
     }
 
     @Then("Admin should see text box is enabled state")
@@ -354,31 +339,57 @@ public class login_SD extends TestBase {
 
     @When("Admin clicks on retype password field")
     public void adminClicksOnRetypePasswordField() {
+
+        login.ResetPwdBtnClick();
     }
 
     @When("Admin enters same password on both field and clicks submit button")
     public void adminEntersSamePasswordOnBothFieldAndClicksSubmitButton() {
+
+        login.NewPasswordTxt("pass@456");
+
+        login. RetypePasswordTxt("pass@456");
+
+        login.SubmitBtnClick();
     }
 
     @Then("Admin should recieve  : {string}. Please click here to login")
     public void adminShouldRecievePleaseClickHereToLogin(String arg0) {
+
+        login.ValidateResetPassword();
     }
 
     @When("AAdmin enters same password on both field with invalid details and clicks submit button")
     public void aadminEntersSamePasswordOnBothFieldWithInvalidDetailsAndClicksSubmitButton() {
-    }
+        login.NewPasswordTxt("pass@786");
 
-    @Then("Error message {string}")
-    public void errorMessage(String arg0) {
+        login. RetypePasswordTxt("pass@786");
+
+        login.SubmitBtnClick();
     }
 
     @When("Admin enters  empty details on both fieldand clicks submit button")
     public void adminEntersEmptyDetailsOnBothFieldandClicksSubmitButton() {
+        login.NewPasswordTxt("");
+
+        login. RetypePasswordTxt("");
+
+        login.SubmitBtnClick();
     }
 
     @When("Admin enters  mismatch values and clicks submit button")
     public void adminEntersMismatchValuesAndClicksSubmitButton() {
-    }
 
+        login.NewPasswordTxt("pass@456");
+
+        login. RetypePasswordTxt("pass@674");
+
+        login.SubmitBtnClick();
+    }
+    @Then("Error message {string}")
+    public void errorMessage(String arg0) {
+
+        login.ValidateResetPassworderror();
+    }
 
 }
