@@ -439,9 +439,8 @@ public Boolean isPaginationArrowDisplayed() {
 	public void clickProgram() {
 		program_Link.click();
 	}
-	public void clickUser() {
-		user_Link.click();
-	}
+
+
 	public void clickAttendance() {
 		attendance_Link.click();
 	}
