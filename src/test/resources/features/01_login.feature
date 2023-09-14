@@ -9,7 +9,8 @@ Feature: Login Page Verification
     When Admin clicks Login button
 
     Then Admin should land on the login page
-  Scenario : Verify for broken link
+    
+  Scenario: Verify for broken link
 
     When Admin clicks Login button
     Then HTTP response >= 400. Then the link is broken
