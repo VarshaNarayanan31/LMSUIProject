@@ -3,6 +3,7 @@ package stepDefinations;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,15 +16,19 @@ import org.openqa.selenium.WebElement;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.messages.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import pages.Assignment_POM;
+import utilities.LoggerLoad;
 
-public class Assignment_SD extends baseClass{
+public class Assignment_SD{
 
 	long start;
 	long end;
 	long responsetime;
+    WebDriver driver;
 
 	Assignment_POM Assign = new Assignment_POM(driver);
+	
 	ArrayList<String> sortedList;
 	ArrayList<String> obtainedListAsc;
 	ArrayList<String> obtainedListDesc;
@@ -38,7 +43,7 @@ public class Assignment_SD extends baseClass{
 	public void admin_is_on_dashboard_page_after_login() {
 		
 		driver.get(url);
-		Loggerload.info("Admin is in dashboard page after login");
+		LoggerLoad.info("Admin is in dashboard page after login");
 	}
 
 	@When("Admin clicks {string} button on the navigation bar")
@@ -159,6 +164,7 @@ public class Assignment_SD extends baseClass{
 	@Given("Admin is on the Manage Assignment page")
 	public void admin_is_on_the_manage_assignment_page() {
 		Assign.verifyAssignTitle();
+		LoggerLoad.info("admin is in manage assignment page");
 	}
 
 	@When("Admin enters Assignment Name into the search box")
@@ -251,14 +257,13 @@ public class Assignment_SD extends baseClass{
 	
 	@Given("Admin logged into the LMS portal and clicks assignment button on the navigation bar")
 	public void admin_logged_into_the_lms_portal_and_clicks_assignment_button_on_the_navigation_bar() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    Assign.AssignButtonClick();
 	}
 
 	
 	@When("Admin clicks the {string} button")
 	public void admin_clicks_the_button(String NewAssignmentButton) {
-	    Assign.AssignButtonClick();
+	    Assign.NewAssignButton();
 	}
 
 	@Then("Admin should see a popup with the heading {string}")
@@ -433,8 +438,8 @@ public class Assignment_SD extends baseClass{
 	
 //Delete assignment
 	
-	@When("Admin clicks delete button in data table row level")
-	public void admin_clicks_delete_button_in_data_table_row_level() {
+	@When("Admin clicks delete button in data table row level in assignment page")
+	public void admin_clicks_delete_button_in_data_table_row_level_in_assignment_page() {
 		Assign.deleteBtnRightclk();
 	}
 
@@ -535,8 +540,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters all mandatory field values with valid data from <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_all_mandatory_field_values_with_valid_data_from_sheet_Name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -548,8 +554,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters all mandatory field values with invalid data from <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_all_mandatory_field_values_with_invalid_data_from_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -560,23 +567,26 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters values in all fields with valid data <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_values_in_all_fields_with_valid_data_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
 	@When("Admin enters with invalid data in optional fields <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_with_invalid_data_in_optional_fields_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
 	@When("Admin enters  data missing value in program name <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_data_missing_value_in_program_name_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -587,8 +597,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters  data missing value in batch number <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_data_missing_value_in_batch_number_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -599,8 +610,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters  data missing value in assignment name <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_data_missing_value_in_assignment_name_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -611,8 +623,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters  data missing value in due date <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_data_missing_value_in_due_date_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -623,8 +636,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters  data missing value in grade by <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_data_missing_value_in_grade_by_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -635,8 +649,9 @@ public class Assignment_SD extends baseClass{
 
 	@When("Admin enters Passed date in the due date field <sheetName> and <rowNumber> and clicks save button")
 	public void admin_enters_passed_date_in_the_due_date_field_sheet_name_and_row_number_and_clicks_save_button(
-			String sheetName, int rowNumber) {
+			String sheetName, int rowNumber) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
 		Assign.Enter_Valid_SheetInputs(sheetName, rowNumber);
+		Assign.passValue();
 		Assign.saveBtnClick();
 	}
 
@@ -692,9 +707,11 @@ public class Assignment_SD extends baseClass{
 	    Assign.isPaginationArrowDisplayed();
 	}
 	@When("Admin creates {int} new assignment")
-	public void admin_creates_new_assignment(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_creates_new_assignment(Integer int1) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException {
+		for ( int i = 0; i<6; i++) {
+			Assign.Enter_Valid_SheetInputs("data_class", 1);
+			Assign.saveBtnClick();
+			}
 	}
 
 	@Then("When total assignment entries above {int} next page is enabled \\( On multiples of {int} new page will be enabled)")
@@ -703,9 +720,12 @@ public class Assignment_SD extends baseClass{
 	}
 
 	@When("Admin creates less than or equal to {int} new assignment")
-	public void admin_creates_less_than_or_equal_to_new_assignment(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void admin_creates_less_than_or_equal_to_new_assignment(Integer int1) throws InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, Exception, InterruptedException {
+		
+		for ( int i = 0; i<5; i++) {
+		Assign.Enter_Valid_SheetInputs("data_class", 1);
+			Assign.saveBtnClick();
+			}
 	}
 
 	@Then("When total assignment entries  {int} or below next page is disabled")
@@ -713,6 +733,53 @@ public class Assignment_SD extends baseClass{
 	    Assign.isRightArrowDisplayed();
 	}
 
+// edit assignment
 	
+	@Given("Admin is in manage assignment page")
+	public void admin_is_in_manage_assignment_page() {
+	    Assign.verifyAssignTitle();
+	}
+
+	@When("Admin clicks Edit button in data table")
+	public void admin_clicks_edit_button_in_data_table() {
+	    Assign.editBtn();
+	}
+
+	@Then("Edit popup window appears with heading Assignment Details")
+	public void edit_popup_window_appears_with_heading_assignment_details() {
+	    Assign.assignpopWindowTitle();
+	}
+
+	@When("Admin clicks Edit button from one of the row in data table")
+	public void admin_clicks_edit_button_from_one_of_the_row_in_data_table() {
+	    Assign.editBtn();
+	}
+
+	@Then("Edit popup window appears with same row values in the all fields")
+	public void edit_popup_window_appears_with_same_row_values_in_the_all_fields() {
+	    Assign.assignpopWindowTitle();
+	}
+
+
+	@When("Admin clicks Cancel button without entering values in the fields")
+	public void admin_clicks_cancel_button_without_entering_values_in_the_fields() {
+	    Assign.cancelBtnClick();
+	}
+
+	@Then("Admin should land on manage assignment page")
+	public void admin_should_land_on_manage_assignment_page() {
+	    Assign.verifyAssignTitle();
+	}
+
+	@When("Admin clicks Cancel button entering values in the fields")
+	public void admin_clicks_cancel_button_entering_values_in_the_fields() {
+		Assign.cancelBtnClick();
+	    
+	}
+
+	@Then("Admin should land on manage assignment Page and validate new assignment is not created in the data table")
+	public void admin_should_land_on_manage_assignment_page_and_validate_new_assignment_is_not_created_in_the_data_table() {
+	    Assign.verifyAssignTitle();
+	}
 
 }

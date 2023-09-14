@@ -3,6 +3,7 @@ Feature: Add new Assignmemnt
 Background: Admin click +Add new assignment button after reaching to manage assignment page
 Given: Admin click +Add new assignmnet button
 
+@addAssignment_1
 Scenario Outline: Validate admin able to add new assignment with valid data in mandatory fields
 
 Given Admin is in assignment details popup window
@@ -13,7 +14,7 @@ Examples:
   |sheetName|rowNumber|
    |data_assignment  |1        |
 
-
+@addAssignment_2
 Scenario Outline: Validate admin able to add new assignment with invalid data in mandatory fields
 
 Given Admin is in assignment details popup window
@@ -24,6 +25,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|2|
 
+@addAssignment_3
 Scenario Outline: Validate admin able to add new assignment with valid data in all fields
 
 Given Admin is in assignment details popup window
@@ -34,6 +36,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|3|
 
+@addAssignment_4
 Scenario Outline: Validate admin able to add new assignment with invalid data in optional fields
 
 Given Admin is in assignment details popup window
@@ -44,6 +47,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|4|
 
+@addAssignment_5
 
 Scenario Outline: Validate admin able to add new assignment missing program name
 
@@ -55,6 +59,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|5|
 
+@addAssignment_6
 Scenario Outline: Validate admin able to add new assignment missing batch number
 
 Given Admin is in assignment details popup window
@@ -64,7 +69,8 @@ Then Batch number is missing
 Examples:
  |sheetName|rowNumber|
     |data_assignment|6|
-
+    
+@addAssignment_7
 Scenario Outline: Validate admin able to add new assignment missing Assignment name 
 
 Given Admin is in assignment details popup window
@@ -75,6 +81,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|7|
 
+@addAssignment_8
 Scenario Outline: Validate admin able to add new assignment missing duedate
 
 Given Admin is in assignment details popup window
@@ -85,6 +92,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|8|
 
+@addAssignment_9
 Scenario Outline: Validate admin able to add new assignment missing grade by 
 
 Given Admin is in assignment details popup window
@@ -95,6 +103,7 @@ Examples:
  |sheetname|rownumber|
   |data_assignment|9|
 
+@addAssignment_10
 Scenario Outline: Validate admin able to add new assignment passing past date
 
 Given Admin is in assignment details popup window
@@ -105,7 +114,7 @@ Examples:
  |sheetname|rownumber|
     |data_assignment|10|
     
-
+@addAssignment_11
 Scenario: Validate date picker
 
 Given Admin is in assignment details popup window

@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import io.cucumber.messages.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import utilities.ExcelReader;
@@ -93,8 +94,16 @@ public class Assignment_POM {
 	@FindBy(xpath = "//li[@class='searchResultTable']")WebElement searchResultTableHeaderElement;
 	@FindBy(xpath = "//*[@class='btn btn-right_arrow']")WebElement right_arrow_btn;
 	@FindBy(xpath = "//*[@class='btn btn-left_arrow']")WebElement left_arrow_btn;
-
-	
+	@FindBy(xpath = "//a[@class='nav-link dropdown-toggle']") WebElement dropDown;
+	@FindBy(xpath = "//Select[@id ='prpgram name'] ") WebElement programName;
+	@FindBy(xpath = "//Select[@id ='Batch id'] ") WebElement BatchId;
+	@FindBy(xpath = "//input[@id ='Assignment Name'] ") WebElement assignmentNameTextBox;
+	@FindBy(xpath = "//input[@id ='Assignment Description'] ") WebElement assignmentDescriptionTextBox;
+	@FindBy(xpath = "//input[@id ='Grade By'] ") WebElement GradeByTextBox;
+	@FindBy(xpath = "//input[@id = 'Assignment due date']") WebElement dueDateTextBox;
+	@FindBy(xpath = "//input[@id ='Assignment file 1'] ") WebElement assignmentfile1TextBox;
+	@FindBy(xpath = "//input[@id ='Assignment file 2'] ") WebElement assignmentfile2TextBox;
+	@FindBy(xpath = "//input[@id ='Assignment file 3'] ") WebElement assignmentfile3TextBox;
 	public void Assignmentlnk() {
 		assignmentLnk.click();
 	}
@@ -552,9 +561,32 @@ public class Assignment_POM {
 		Assignment_file1 = TestData.get(Rownumber).get("Assignmentfile1");
 		Assignment_file2 = TestData.get(Rownumber).get("Assignmentfile2");
 		Assignment_file3 = TestData.get(Rownumber).get("Assignmentfile3");
-		Assignment_file4 = TestData.get(Rownumber).get("Assignmentfile4");
-		Assignment_file5 = TestData.get(Rownumber).get("Assignmentfile5");
 
+
+	}
+	
+	
+	public  void dropdownClick() {
+		dropDown.click();
+		
+	}
+	
+	public void passValue() {
+		
+		dropDown.click();
+		Select select = new Select(programName);
+		select.selectByVisibleText(Program_name);
+		dropDown.click();
+		Select select1 = new Select(BatchId);
+	    select1.selectByVisibleText(Batch_number);
+		//BatchId.sendKeys(Batch_number);
+		assignmentNameTextBox.sendKeys(Assignment_Name);
+		assignmentDescriptionTextBox.sendKeys(Assignment_Description);
+		GradeByTextBox.sendKeys(grade_by);
+		dueDateTextBox.sendKeys(Assignment_duedate);
+		assignmentfile1TextBox.sendKeys(Assignment_file1);
+		assignmentfile2TextBox.sendKeys(Assignment_file2);
+		assignmentfile3TextBox.sendKeys(Assignment_file3);
 	}
 
 	public boolean alertMesg() {
@@ -638,4 +670,12 @@ public boolean addClassWindow() {
 		return addClassPage.isDisplayed();
 	}
 
+
+//edit assignment
+public void cancelBtnClick() {
+	cancelBtn.click();
+	
 }
+	
+}
+
