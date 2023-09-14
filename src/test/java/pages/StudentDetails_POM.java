@@ -4,17 +4,14 @@ package pages;
 
 	import java.util.List;
 
-import org.openqa.selenium.Dimension;
-	import org.openqa.selenium.JavascriptExecutor;
+    import org.openqa.selenium.JavascriptExecutor;
 	import org.openqa.selenium.WebDriver;
 	import org.openqa.selenium.WebElement;
 	import org.openqa.selenium.support.FindBy;
 	import org.openqa.selenium.support.PageFactory;
 	import org.openqa.selenium.support.ui.Select;
 
-	import com.graphbuilder.curve.Point;
-
-import utilities.LoggerLoad;
+    import utilities.LoggerLoad;
 
 	
 	public class StudentDetails_POM {
@@ -130,16 +127,18 @@ import utilities.LoggerLoad;
 		js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", selectbatchIdDropdown);
 	}
 
-	public void selectNameFromStudentDropdown() {
+	public Object selectNameFromStudentDropdown() {
 
 		Select studentNameDropdown = new Select(selectStudentDropdown);
 		studentNameDropdown.selectByVisibleText("Sylvia");
-		
-	}
 
-	public void selectBatchIdFromBatchDropdown() {
+        return null;
+    }
+
+	public Object selectBatchIdFromBatchDropdown() {
 		Select batchIdDropdown = new Select(selectbatchIdDropdown);
 		batchIdDropdown.selectByVisibleText("3566");
+		return null;
 		
 	}
 

@@ -1,10 +1,12 @@
 package pages;
 
+
+import baseClass.TestBase;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Batch_POM {
+public class Batch_POM extends TestBase{
 	
 	
     @FindBy(xpath = "//a[text()=Assignment Details")WebElement batchDetails;

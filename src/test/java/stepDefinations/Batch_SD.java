@@ -5,11 +5,12 @@ import io.cucumber.java.en.When;
 import pages.Assignment_POM;
 import pages.Batch_POM;
 
+import static baseClass.TestBase.driver;
+
 public class Batch_SD {
-	
 
 	Assignment_POM Assign = new Assignment_POM(driver);
-    Batch_POM batch = new Batch_POM(driver);
+    Batch_POM batch = new Batch_POM();
     
     
 	@When("Admin clicks {string} from navigation bar")

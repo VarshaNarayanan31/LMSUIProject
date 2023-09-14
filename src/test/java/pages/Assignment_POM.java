@@ -1,5 +1,4 @@
 package pages;
-
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
@@ -21,7 +20,8 @@ import org.openqa.selenium.support.ui.Select;
 import io.cucumber.messages.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import utilities.ExcelReader;
 
-public class Assignment_POM {
+import baseClass.TestBase;
+public class Assignment_POM extends TestBase{
 
 	WebDriver driver;
 	public String assignmentName;
