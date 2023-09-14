@@ -2,7 +2,9 @@
 Feature: Manage Attendance Page verification
 
   Background: Logged on the LMS portal as Admin
+
     Given Admin is on dashboard page after Login
+
     When Admin clicks "Attendance" on the navigation bar
 
   Scenario: Validate the header of the page
@@ -35,7 +37,7 @@ Feature: Manage Attendance Page verification
   Scenario: Verify data table on the attendance page
 
     Then Admin should see data table on the Manage Attendance Page With following column headers.
-     #(|Check box symbol|,|Class ID|, |Student Id|,|Present|,|Edit /Delete|)
+      | data_table | | Class ID || Student Id || Present || Edit /Delete |
 
   Scenario: Verify Edit icon in the data table
     Then Edit Icon in each row of data table only  when entries are available
@@ -58,13 +60,12 @@ Feature: Manage Attendance Page verification
 
   Scenario: Validate the number entries displaying
     Then Above the footer Admin should see the text as "Showing x to y of z entries" below the table.
-  # x- starting record number on that page
-		#y-ending record number on that page
-	#z-Total number of records  Note: with or without entries
-
 
   Scenario: Verify Pagination control below the data table
     Then Admin should see the pagination controls under the data table
 
   Scenario: Validate footer  text
     Then Admin should see the text with total number classes in the data table. ( " In total there are number of classes")
+
+
+

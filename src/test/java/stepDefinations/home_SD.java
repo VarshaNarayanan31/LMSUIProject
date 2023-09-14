@@ -1,12 +1,9 @@
-package stepDefinitions;
-import java.util.List;
+package stepDefinations;
 
 import io.cucumber.java.Before;
-import org.junit.Assert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.datatable.DataTable;
 import baseClass.TestBase;
 import pages.Home_POM;
 public class home_SD extends TestBase {
@@ -65,7 +62,7 @@ public class home_SD extends TestBase {
     }
     @Then("Admin should see logo is properly aligned")
     public void admin_should_see_logo_is_properly_aligned() {
-       // home.verifylogin_allgin();
+        home.verify_logoAllig();
     }
     @Then("Admin should see login button")
     public void admin_should_see_login_button() {

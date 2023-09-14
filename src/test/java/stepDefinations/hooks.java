@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinations;
 
 import baseClass.TestBase;
 import io.cucumber.java.After;

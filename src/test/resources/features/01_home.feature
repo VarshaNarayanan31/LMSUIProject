@@ -42,3 +42,4 @@ Feature: Home Page Verification
   Scenario: Verify login button is clickable
     When Admin gives the correct LMS portal URL
     Then Admin should able to click the Login button
+

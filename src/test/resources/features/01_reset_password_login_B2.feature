@@ -1,7 +1,7 @@
 @reset2
-Feature: Reset password Verification
+Feature: Reset password Verification login page
 
-  Background: Admin clicks reset password link after  reaching in login page
+  Background: Admin clicks reset password link after reaching in login page
 
     Given Admin reset password page
 
@@ -10,7 +10,6 @@ Feature: Reset password Verification
     When Admin clicks on type in new password field
 
     Then Admin should see text box is enabled state
-
 
   Scenario: verify text box is in enabled in retype password field
 

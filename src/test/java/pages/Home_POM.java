@@ -13,9 +13,10 @@ import java.net.URLConnection;
 
 import baseClass.TestBase;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 public class Home_POM extends TestBase {
     @FindBy(xpath = "/html/body/div[1]/div[2]/div/img") WebElement logo;
-    @FindBy(xpath = "//p[@id='login' and @align='right']") WebElement login_allign;
     @FindBy(xpath = "//span[text()='Login']") WebElement login_btn;
 
 
@@ -29,10 +30,13 @@ public class Home_POM extends TestBase {
     public void verifyurl() {
 
         String actualUrl = driver.getCurrentUrl();
+
         if (actualUrl.contains("url")) {
+
             System.out.println("Admin lands on the home page");
 
         } else {
+
             System.out.println("Admin receives 404 page not found error");
         }
 
@@ -41,6 +45,7 @@ public class Home_POM extends TestBase {
     public boolean verifylogo() {
         return logo.isDisplayed();
     }
+
 
    //
     public void text_spelling() {
@@ -71,6 +76,15 @@ public class Home_POM extends TestBase {
 
         }
 
+    public void verify_logoAllig() {
+
+        int id1X = driver.findElement(By.id("id1")).getLocation().x;
+
+        int id2X = driver.findElement(By.id("id2")).getLocation().x;
+
+       Assert.assertEquals(id1X, id2X);
+    }
+
     public boolean verify_loginBtn() {
         return login_btn.isDisplayed();
 
@@ -80,6 +94,7 @@ public class Home_POM extends TestBase {
 
         login_btn.click();
     }
+
 
 
 //sample for broken link

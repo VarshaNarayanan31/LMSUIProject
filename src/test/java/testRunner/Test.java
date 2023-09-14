@@ -8,7 +8,7 @@ public class Test {
 
 
     @CucumberOptions(features ={"src/test/resources/features"},
-            glue = {"stepDefinitions","Hooks"},
+            glue = {"stepDefinations","Hooks"},
             monochrome = true,
             plugin = {"pretty",
                     "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

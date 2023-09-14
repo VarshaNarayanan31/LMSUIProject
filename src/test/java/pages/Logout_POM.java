@@ -6,11 +6,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import baseClass.TestBase;
 
-public class Logout extends TestBase {
+public class Logout_POM extends TestBase {
     @FindBy (xpath="//*[contains(text(),'Logout')]") WebElement logout_btn;
 
     // declaring constructor
-    public Logout() {
+    public Logout_POM() {
         PageFactory.initElements(driver,this);
     }
 

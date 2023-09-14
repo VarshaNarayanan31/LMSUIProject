@@ -1,22 +1,21 @@
-package stepDefinitions;
+package stepDefinations;
 import baseClass.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import pages.Manage_Attendance_POM;
+import pages.Attendance_POM;
 
-    public class attendance_SD extends TestBase {
-
+public class attendance_SD extends TestBase {
         long start;
         long end;
         long responsetime;
-        Manage_Attendance_POM at_manage = new Manage_Attendance_POM();
-
-
+        Attendance_POM at_manage = new Attendance_POM();
+        // Manage attendance steps
         @Given("Admin is on dashboard page after Login")
         public void admin_is_on_dashboard_page_after_Login() {
-            Initialization();
+
+
+
             System.out.println("Admin is in dashboard page after login");
         }
 

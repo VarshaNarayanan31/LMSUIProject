@@ -1,36 +1,59 @@
 package pages;
 
 import baseClass.TestBase;
-import java.net.MalformedURLException;
-import java.util.List;
-import org.junit.Assert;
+import static org.testng.Assert.assertEquals;
+import java.io.IOException;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
-import static org.testng.Assert.assertEquals;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.support.ui.Select;
+import io.cucumber.datatable.DataTable;
+import utilities.ExcelReader;
 
+public class Attendance_POM extends TestBase {
+    String excelPath = "./src/test/resources/assignment_testdata.xlsx" ;
+    public String ClassID,StudentID,Present,Program_name,Class_name,Student_name,Attendance,Attendance_date;
+    String searchedField;
+    String searchedValue;
+    List<Map<String, String>> searchResultTable;
 
-public class Manage_Attendance_POM extends TestBase {
-    public String ClassID;
-    public String StudentID;
-    public String Present;
+    public Attendance_POM() {
 
+        PageFactory.initElements(driver, this);
+
+    }
+
+    //Manage Attendance page:
     @FindBy(xpath="//*[@class='btn btn-Attendence']")WebElement btnClickAttendence;
     @FindBy(xpath="//*[contains(text(),'Manage Attendence')")WebElement Message;
     @FindBy(xpath="//*[contains(text(),'Showing 1 to 2 of 2 entries.')")WebElement Message1;
+    //all the entries
+    @FindBy(xpath = "//table[contains(@id,’Attendance’)/tr[0]/th") List<WebElement> tableHeader;
 
     @FindBy(xpath="//*[@class='btn Attendence-delete'')")WebElement btnclickdel;
+    @FindBy(xpath = "//div[@class='alert alert-primary']")WebElement delete_alertMsg;
     @FindBy(xpath="//*[@class='btn Attendence-edit'')")WebElement btnclickedit;
 
     @FindBy(xpath = "//input[@type='text']") WebElement searchBox;
     @FindBy(xpath = "//button[text()='A new Attendance']") WebElement NewAttenButton;
-    //all the entries
-    @FindBy(xpath = "//table[contains(@id,’Attendance’)/tr[0]/th") List<WebElement> tableHeader;
+    //delete page
+    @FindBy(name = "closepopingup") WebElement close;
+
+    @FindBy(xpath = "//*[@class='btn btn-yes']")WebElement yes_btn;
+    @FindBy(xpath = "//*[@class='btn btn-no']")WebElement no_btn;
+    @FindBy(xpath = "//div[@class='success']")WebElement successMsg;
 
 //delete single and multiple button
     @FindBy(xpath = "//*[@class='btn btn-delete-on-right']")
@@ -45,7 +68,7 @@ public class Manage_Attendance_POM extends TestBase {
     WebElement singlecheckbox;
     //pending
     @FindBy(xpath = "//table//thead//tr//ta//th//input")
-    List<WebElement> multiplecheckbox;
+    WebElement multiplecheckbox;
 
     @FindBy(xpath = "//*[contains(text(),'In total there are number of assignments')]")
     WebElement footerText;
@@ -58,9 +81,35 @@ public class Manage_Attendance_POM extends TestBase {
     public List<WebElement> ClassIDvalues;
     @FindBy(xpath = "//table//thead//tr//td[2]")
     public List<WebElement> StudentIDvalues;
-//
+
+    @FindBy(xpath = "//*[@class='btn btn-right_arrow']")WebElement right_arrow_btn;
+    @FindBy(xpath = "//*[@class='btn btn-left_arrow']")WebElement left_arrow_btn;
+    @FindBy(xpath="//a[@href='/student']")WebElement student_Link;
+    @FindBy(xpath="//a[@href='/program']")WebElement program_Link;
+    @FindBy(xpath="//a[@href='/batch']")WebElement batch_Link;
+    @FindBy(xpath="//a[@href='/class']")WebElement class_Link;
+    @FindBy(xpath="//a[@href='/user']")WebElement user_Link;
+    @FindBy(xpath="//a[@href='/assignment']")WebElement assignment_Link;
+    @FindBy(xpath="//a[@href='/logout']")WebElement logout_Link;
+    @FindBy(xpath="//a[@href='/close_btn']")WebElement closeButton;
+    @FindBy(xpath="//a[@href='/edit_btn']")WebElement editBtn;
+    @FindBy(xpath = "//div[@class='delete_element']")WebElement deletedElement;
+    @FindBy(xpath = "//*[@class='btn btn-page_number']")WebElement pageNumber;
+
+    @FindBy(xpath = "//div[@class='add_class']")WebElement addClassPage;
+//reference
+@FindBy(xpath="//input[@class='programName']")  WebElement att_programName;
+    @FindBy(xpath="//input[@class='className']") WebElement att_className;
+    @FindBy(xpath="//input[@class='studentName']")  WebElement att_studentName;
+    @FindBy(xpath="//div[@class='dropdown show']/a[3]") WebElement att_select;
+    @FindBy(className="day")List<WebElement> att_selectDate;
+    @FindBy(xpath="//*[@id='cancel']") WebElement att_cancel;
+    @FindBy(xpath="//*[@id='save']") WebElement att_save;
+
     @FindBy(xpath="//*[@class='btn Attendence-present')")WebElement btnclickonPresent;
     @FindBy(xpath="//*[@class='btn Attendence-absent')")WebElement btnclickonAbsent;
+    //pagination
+    @FindBy(xpath = "//li[@class='pagination-arrow next-link']")WebElement paginationEndArrow;
     @FindBy(xpath = "//*[contains(text(),'Showing x to y of z entries')]")
     WebElement paginatorText;
     @FindBy(xpath = "//li[@class='pagination-link next-link']")
@@ -69,16 +118,13 @@ public class Manage_Attendance_POM extends TestBase {
     @FindBy(className = "sort-icon")
     WebElement sortIcon;
 
-    //constructor
-    public Manage_Attendance_POM() {
-        PageFactory.initElements(driver, this);
 
-    }
+    //Methods creation
 
-    //Methods
     public void verifyurl() {
 
         String actualurl = driver.getCurrentUrl();
+
         if (actualurl.contains("Attendance")) {
             System.out.println("user is in Attendance page");
         } else {
@@ -145,6 +191,7 @@ public class Manage_Attendance_POM extends TestBase {
         }
 
         if (actualHeaders.equals(expectedHeaders)) {
+
             System.out.println("Headers are valid.");
         } else {
             System.out.println("Headers do not match the expected headers.");
@@ -153,6 +200,7 @@ public class Manage_Attendance_POM extends TestBase {
     public void editBtn() {
 
         boolean editBtnValue = editOnRight_btn.isDisplayed();
+
         if (editBtnValue = true) {
             System.out.println("editButton on right is displayed");
         } else {
@@ -163,6 +211,7 @@ public class Manage_Attendance_POM extends TestBase {
     public void deleteBtn() {
 
         boolean deleteBtnValue = single_deleteOnRight_btn.isDisplayed();
+
         if (deleteBtnValue = true) {
             System.out.println("editButton on right is displayed");
         } else {
@@ -176,6 +225,7 @@ public class Manage_Attendance_POM extends TestBase {
     public void checkBox() {
 
         boolean checkboxValue = singlecheckbox.isSelected();
+
         if (checkboxValue = true) {
             System.out.println("checkbox is selected");
         } else {
@@ -201,7 +251,9 @@ public class Manage_Attendance_POM extends TestBase {
     public void searchForText(String searchText, List<WebElement> elements) {
 
         boolean hasSearch = false;
+
         for (WebElement searchValue : elements) {
+
             if (searchValue.getText().equalsIgnoreCase(searchText)) {
                 hasSearch = true;
                 break;
@@ -214,6 +266,7 @@ public class Manage_Attendance_POM extends TestBase {
     public void paginationControl() {
 
         boolean PaginationValue = paginationControl.isDisplayed();
+
         if (PaginationValue = true) {
             System.out.println("pagination control is displayed");
         } else {
@@ -257,6 +310,65 @@ public class Manage_Attendance_POM extends TestBase {
         String expectedText = "In total there are" + value + "of Attendances";
         assertEquals(expectedText, actualText);
     }
+
+
+//
+
+    public void DeleteButton() {
+        //deleteBtn().click();
+    }
+
+    public Integer chkDeletedRow() {
+        List<WebElement> deletedElements =driver.findElements((By) deletedElement);
+        return deletedElements.size();
+    }
+
+
+    // method to get the alert message
+    public boolean alertMessage() {
+        return delete_alertMsg.isDisplayed();
+    }
+
+   // public boolean deleteAlertWindow() {
+      //  return deleteAlertPage.isDisplayed();
+    //}
+
+    public Boolean yesBtn() {
+        return yes_btn.isDisplayed();
+    }
+
+    public Boolean noBtn() {
+        return no_btn.isDisplayed();
+    }
+
+    public void yesButtonClick() {
+        yes_btn.click();
+    }
+    public void noButtonClick() {
+        no_btn.click();
+    }
+    public boolean successMessage() {
+        return successMsg.isDisplayed();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
