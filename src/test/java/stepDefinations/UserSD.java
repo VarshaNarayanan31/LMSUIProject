@@ -2,6 +2,8 @@ package stepDefinations;
 
 import static org.testng.Assert.assertEquals;
 
+import org.openqa.selenium.WebDriver;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,6 +11,7 @@ import pages.Class_POM;
 import pages.User_POM;
 
 public class UserSD {
+	WebDriver driver;
 	
 	Class_POM classPom = new Class_POM( driver);	
 	User_POM user = new User_POM( driver);
@@ -66,7 +69,7 @@ public class UserSD {
 
 	@Given("Admin is on dashboard page after Login and Admin clicks {string} from navigation bar")
 	public void admin_is_on_dashboard_page_after_login_and_admin_clicks_from_navigation_bar(String string) {
-		driver.get(url);
+		driver.get("url");
 		user.clickUser();
 	}
 

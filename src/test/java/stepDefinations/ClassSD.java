@@ -6,9 +6,11 @@ import io.cucumber.java.en.When;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Assert;
 
 
@@ -23,6 +25,7 @@ public class ClassSD {
 	long start;
 	long end;
 	long responsetime;
+	WebDriver driver;
 	
 	Class_POM classPom = new Class_POM( driver);
 	ArrayList<String> sortedList;
@@ -34,7 +37,7 @@ public class ClassSD {
 	
 	@Given("Admin is on dashboard page after Login")
 	public void admin_is_on_dashboard_page_after_login() {
-		driver.get(url);
+		driver.get("url");
 	}
 
 	@When("Admin clicks {string} button on the navigation bar")
@@ -310,7 +313,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters all mandatory field values with valid data from {string} and {int} and clicks save button")
-	public void admin_enters_all_mandatory_field_values_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_all_mandatory_field_values_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -323,7 +326,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters all mandatory field values with invalid data from {string} and {int} and clicks save button")
-	public void admin_enters_all_mandatory_field_values_with_invalid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_all_mandatory_field_values_with_invalid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -334,19 +337,19 @@ public class ClassSD {
 	}
 
 	@When("Admin enters values in all fields with valid data from {string} and {int} and clicks save button")
-	public void admin_enters_values_in_all_fields_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_values_in_all_fields_with_valid_data_from_and_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
 
 	@When("Admin enters with invalid data from {string} and {int} in optional fields and clicks save button")
-	public void admin_enters_with_invalid_data_from_and_in_optional_fields_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_with_invalid_data_from_and_in_optional_fields_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
 
 	@When("Admin enters  data from {string} and {int} missing value in Batch ID and clicks save button")
-	public void admin_enters_data_from_and_missing_value_in_batch_id_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_data_from_and_missing_value_in_batch_id_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -357,7 +360,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters data from {string} and {int} missing value in No of class and clicks save button")
-	public void admin_enters_data_from_and_missing_value_in_no_of_class_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_data_from_and_missing_value_in_no_of_class_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -368,7 +371,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters data from {string} and {int} missing value in  class date and clicks save button")
-	public void admin_enters_data_from_and_missing_value_in_class_date_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_data_from_and_missing_value_in_class_date_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -379,7 +382,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters data from {string} and {int} missing value in staff id and clicks save button")
-	public void admin_enters_data_from_and_missing_value_in_staff_id_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_data_from_and_missing_value_in_staff_id_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -390,7 +393,7 @@ public class ClassSD {
 	}
 
 	@When("Admin enters passed date from {string} and {int} in the class date field and clicks save button")
-	public void admin_enters_passed_date_from_and_in_the_class_date_field_and_clicks_save_button(String sheetName, Integer rowNumber) {
+	public void admin_enters_passed_date_from_and_in_the_class_date_field_and_clicks_save_button(String sheetName, Integer rowNumber) throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs(sheetName, rowNumber);
 		classPom.saveClick();
 	}
@@ -529,13 +532,13 @@ public class ClassSD {
 	}
 
 	@When("Admin enters values in all fields with invalid data and clicks save button \\(Batch ID , No of Classes, Class Date, Class Topic, Staff Id, Class description, Comments, Notes, Recordings)")
-	public void admin_enters_values_in_all_fields_with_invalid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_class_topic_staff_id_class_description_comments_notes_recordings() {
+	public void admin_enters_values_in_all_fields_with_invalid_data_and_clicks_save_button_batch_id_no_of_classes_class_date_class_topic_staff_id_class_description_comments_notes_recordings() throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs("data_class", 2);
 		classPom.saveClick();
 	}
 
 	@When("Admin enters  data missing value in No of Class and clicks save button \\(Batch ID, Class Date, Staff Id)")
-	public void admin_enters_data_missing_value_in_no_of_class_and_clicks_save_button_batch_id_class_date_staff_id() {
+	public void admin_enters_data_missing_value_in_no_of_class_and_clicks_save_button_batch_id_class_date_staff_id() throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs("data_class", 6);
 		classPom.saveClick();
 	}
@@ -546,14 +549,14 @@ public class ClassSD {
 	}
 
 	@When("Admin enters  data missing value in Class Date and clicks save button \\(Batch ID, No of class, Staff Id)")
-	public void admin_enters_data_missing_value_in_class_date_and_clicks_save_button_batch_id_no_of_class_staff_id() {
+	public void admin_enters_data_missing_value_in_class_date_and_clicks_save_button_batch_id_no_of_class_staff_id() throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs("data_class", 7);
 		classPom.saveClick();
 	}
 
 	
 	@When("Admin enters  data missing value in staff id and clicks save button \\(Batch ID, No of class, Class Date)")
-	public void admin_enters_data_missing_value_in_staff_id_and_clicks_save_button_batch_id_no_of_class_class_date() {
+	public void admin_enters_data_missing_value_in_staff_id_and_clicks_save_button_batch_id_no_of_class_class_date() throws InvalidFormatException, IOException, InterruptedException {
 		classPom.Enter_Valid_SheetInputs("data_class", 8);
 		classPom.saveClick();
 	}
@@ -760,7 +763,7 @@ public class ClassSD {
 	}
 
 	@When("Admin creates {int} new class")
-	public void admin_creates_new_class(Integer int1) {
+	public void admin_creates_new_class(Integer int1) throws InvalidFormatException, IOException, InterruptedException {
 		for ( int i = 0; i<6; i++) {
 		classPom.Enter_Valid_SheetInputs("data_class", 1);
 		classPom.saveClick();
@@ -774,7 +777,7 @@ public class ClassSD {
 	}
 
 	@When("Admin creates less than or equal to {int} new class")
-	public void admin_creates_less_than_or_equal_to_new_class(Integer int1) {
+	public void admin_creates_less_than_or_equal_to_new_class(Integer int1) throws InvalidFormatException, IOException, InterruptedException {
 		for ( int i = 0; i<5; i++) {
 			classPom.Enter_Valid_SheetInputs("data_class", 1);
 			classPom.saveClick();

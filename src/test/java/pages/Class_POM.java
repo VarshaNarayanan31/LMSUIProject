@@ -456,6 +456,9 @@ public Boolean isPaginationArrowDisplayed() {
 	public void clickBatch() {
 		batch_Link.click();
 	}
+	public void clickUser() {
+		user_Link.click();
+	}
 	public void clickLogout() {
 		logout_Link.click();
 	}
