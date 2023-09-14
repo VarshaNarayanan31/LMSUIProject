@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+import baseClass.TestBase;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,10 +18,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.messages.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import org.testng.internal.BaseClassFinder;
 import pages.Assignment_POM;
 import utilities.LoggerLoad;
 
-public class Assignment_SD{
+public class Assignment_SD extends TestBase {
 
 	long start;
 	long end;
@@ -42,7 +44,7 @@ public class Assignment_SD{
 	@Given("Admin is on dashboard page after Login")
 	public void admin_is_on_dashboard_page_after_login() {
 		
-		driver.get(url);
+		//driver.get(url);
 		LoggerLoad.info("Admin is in dashboard page after login");
 	}
 
